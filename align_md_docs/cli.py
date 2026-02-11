@@ -1,5 +1,6 @@
 import sys
 import os
+from importlib.metadata import version as pkg_version
 
 from align_md_docs import tables, box_widths, box_walls, rails, arrows, pipes
 
@@ -41,6 +42,8 @@ Checks and fixes:
 Usage:
   align-md-docs <path>               # auto-fix file or all .md in folder
   align-md-docs --check <path>       # detect-only, no writes
+  align-md-docs --help               # show this help
+  align-md-docs --version            # show version
 
 Exit codes:
   0 - all docs aligned (or all issues auto-fixed)
@@ -63,8 +66,16 @@ def _collect_files(path):
 
 
 def main():
+  if '--help' in sys.argv or '-h' in sys.argv:
+    print_help()
+    sys.exit(0)
+
+  if '--version' in sys.argv or '-v' in sys.argv:
+    print(pkg_version('align-md-docs'))
+    sys.exit(0)
+
   check_only = '--check' in sys.argv
-  args = [a for a in sys.argv[1:] if a != '--check']
+  args = [a for a in sys.argv[1:] if a.startswith('-') is False]
 
   if len(args) == 0:
     print_help()
