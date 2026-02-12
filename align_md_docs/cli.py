@@ -4,9 +4,9 @@ import os
 import sys
 from importlib.metadata import version as pkg_version
 
-from align_md_docs import arrows, box_walls, box_widths, pipes, rails, tables
+from align_md_docs import arrows, box_walls, box_widths, list_descs, pipes, rails, tables
 
-ALL_CHECKS = [tables, box_widths, box_walls, rails, arrows, pipes]
+ALL_CHECKS = [tables, box_widths, box_walls, rails, arrows, pipes, list_descs]
 
 
 def run_checks(lines):
@@ -27,6 +27,7 @@ def run_fixes(lines):
         if fixed == prev:
             break
     fixed = arrows.fix(fixed)
+    fixed = list_descs.fix(fixed)
     return fixed
 
 
@@ -40,6 +41,7 @@ Checks and fixes:
   4. Arrow alignment - aligns standalone v/^ arrows with the nearest box char above/below
   5. Pipe continuity - traces from T-junctions to detect drifted connector pipes
   6. Box walls       - verifies nested box right walls match their opening/closing borders
+  7. List descs      - aligns the separator dash in list item descriptions
 
 Usage:
   align-md-docs <path>               # check-only (default)
