@@ -4,7 +4,7 @@ import os
 import sys
 from importlib.metadata import version as pkg_version
 
-from align_md_docs import arrows, box_walls, box_widths, list_descs, pipes, rails, tables
+from mdalign.checks import arrows, box_walls, box_widths, list_descs, pipes, rails, tables
 
 ALL_CHECKS = [tables, box_widths, box_walls, rails, arrows, pipes, list_descs]
 
@@ -32,7 +32,7 @@ def run_fixes(lines):
 
 
 def print_help():
-    print("""align-md-docs - Auto-fix alignment issues in markdown documentation files.
+    print("""mdalign - Auto-fix alignment issues in markdown documentation files.
 
 Checks and fixes:
   1. Tables          - pads cells so every column matches the separator row width
@@ -44,11 +44,11 @@ Checks and fixes:
   7. List descs      - aligns the separator dash in list item descriptions
 
 Usage:
-  align-md-docs <path>               # check-only (default)
-  align-md-docs --fix <path>         # auto-fix files in place
-  align-md-docs --diff <path>        # show unified diff of changes
-  align-md-docs --help               # show this help
-  align-md-docs --version            # show version
+  mdalign <path>               # check-only (default)
+  mdalign --fix <path>         # auto-fix files in place
+  mdalign --diff <path>        # show unified diff of changes
+  mdalign --help               # show this help
+  mdalign --version            # show version
 
 Paths can be files, directories, or glob patterns (e.g. "docs/**/*.md").
 
@@ -89,7 +89,7 @@ def main():
         sys.exit(0)
 
     if "--version" in sys.argv or "-v" in sys.argv:
-        print(pkg_version("align-md-docs"))
+        print(pkg_version("mdalign"))
         sys.exit(0)
 
     fix_mode = "--fix" in sys.argv

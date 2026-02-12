@@ -10,4 +10,4 @@ test:
 	.venv/bin/pytest -v
 
 practical-test:
-	.venv/bin/align-md-docs --check docs/
+	.venv/bin/mdalign --check docs/

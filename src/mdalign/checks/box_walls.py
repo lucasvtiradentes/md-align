@@ -1,5 +1,5 @@
-from align_md_docs.parser import iter_code_blocks
-from align_md_docs.utils import (
+from mdalign.parser import iter_code_blocks
+from mdalign.utils import (
     BOX_CHARS,
     BOX_WALL_DRIFT,
     _find_box_closer,

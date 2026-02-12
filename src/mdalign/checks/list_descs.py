@@ -1,7 +1,5 @@
 import re
 
-_PATTERN = re.compile(r'^(\s*- .+?)\s+(- .+)$')
-
 
 def _parse_line(raw):
     prefix_match = re.match(r'^(\s*- )', raw)
