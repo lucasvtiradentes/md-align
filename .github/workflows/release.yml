@@ -11,6 +11,7 @@ on:
           - patch
           - minor
           - major
+          - none
 
 permissions:
   contents: write
@@ -37,6 +38,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Bump version
+        if: inputs.bump != 'none'
         run: bump2version ${{ inputs.bump }}
 
       - name: Read new version
