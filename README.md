@@ -15,6 +15,14 @@ Auto-fix alignment issues in markdown documentation files containing box-drawing
 ## Install
 
 ```bash
+# globally available as a CLI tool
+pipx install mdalign
+```
+
+or
+
+```bash
+# inside a virtual environment
 pip install mdalign
 ```
 
