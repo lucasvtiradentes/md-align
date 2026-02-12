@@ -34,7 +34,9 @@ def _check_widths(code_lines):
         for (first, last), lines_in_group in by_extent.items():
             lengths = {}
             for i, raw in lines_in_group:
-                lengths.setdefault(len(raw), []).append(i + 1)
+                after_box = raw[last + 1:]
+                effective_len = last + 1 if after_box.strip() else len(raw)
+                lengths.setdefault(effective_len, []).append(i + 1)
 
             if len(lengths) > 1:
                 most_common = max(lengths.keys(), key=lambda k: len(lengths[k]))
@@ -67,7 +69,9 @@ def _fix_widths_in_block(code_indices, all_lines):
         for (first, last), lines_in_group in by_extent.items():
             lengths = {}
             for i, raw in lines_in_group:
-                lengths.setdefault(len(raw), []).append(i)
+                after_box = raw[last + 1:]
+                effective_len = last + 1 if after_box.strip() else len(raw)
+                lengths.setdefault(effective_len, []).append(i)
 
             if len(lengths) <= 1:
                 continue
