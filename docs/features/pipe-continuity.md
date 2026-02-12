@@ -66,4 +66,4 @@ related docs:
 
 related sources:
 - src/mdalign/checks/pipes.py - check and fix implementation
-- src/mdalign/utils.py - PIPE_DRIFT_MAX, _find_nearby_isolated_pipe, _shift_pipe
+- src/mdalign/utils.py        - PIPE_DRIFT_MAX, _find_nearby_isolated_pipe, _shift_pipe

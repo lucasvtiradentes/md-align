@@ -21,7 +21,7 @@ Repository: github.com/lucasvtiradentes/align-md-docs
 | Arrow alignment    | Aligns standalone v/^ arrows with nearest box char       |
 | Pipe continuity    | Traces T-junctions to detect drifted connector pipes     |
 | Box walls          | Matches nested box right walls to opening/closing borders|
-| List descriptions  | Aligns separator dash in list item descriptions           |
+| List descriptions  | Aligns separator dash in list item descriptions          |
 
 ## Doc index
 

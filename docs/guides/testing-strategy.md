@@ -22,26 +22,26 @@ Fixtures are organized into two groups:
 
 checks/ - per-module fixtures (1:1 with src/mdalign/checks/):
 
-| Category     | Count | Tests                                                  |
-|--------------|-------|--------------------------------------------------------|
-| tables       | 3     | col-mismatch, fp-aligned-table, fp-pipe-in-text        |
-| box-widths   | 3     | trailing-space, border-vs-content, fp-consistent-width |
-| box-walls    | 4     | short-wall, inner-displaced, nested-cascade, fp-aligned|
-| rails        | 2     | column-drift, fp-aligned-rails                         |
-| arrows       | 3     | v-arrow-shift, fp-arrow-in-text, fp-already-aligned    |
-| pipes        | 2     | pipe-drift, fp-aligned-pipes                           |
-| list-descs   | 5     | basic, fp-single-item, fp-hyphenated, fp-non-consec, fp-code-block |
+| Category     | Count | Tests                                                             |
+|--------------|-------|-------------------------------------------------------------------|
+| tables       | 3     | col-mismatch, fp-aligned-table, fp-pipe-in-text                   |
+| box-widths   | 3     | trailing-space, border-vs-content, fp-consistent-width            |
+| box-walls    | 4     | short-wall, inner-displaced, nested-cascade, fp-aligned           |
+| rails        | 2     | column-drift, fp-aligned-rails                                    |
+| arrows       | 3     | v-arrow-shift, fp-arrow-in-text, fp-already-aligned               |
+| pipes        | 2     | pipe-drift, fp-aligned-pipes                                      |
+| list-descs   | 5     | basic, fp-single-item, fp-hyphenated, fp-non-consec, fp-code-block|
 
 general/ - integration and edge case fixtures:
 
-| Category     | Count | Tests                                         |
-|--------------|-------|-----------------------------------------------|
-| trees        | 2     | Schema tree, flow tree (should be skipped)    |
-| mixed        | 1     | Multiple issue types in one file              |
-| nested       | 2     | Deep nested boxes, tree inside box            |
-| multi-column | 2     | Sequence diagram, branching flow              |
-| deploy       | 1     | Pipeline with merge diagram                   |
-| edge-cases   | 5     | Empty file, no code blocks, unclosed, unicode, empty block |
+| Category     | Count | Tests                                                     |
+|--------------|-------|-----------------------------------------------------------|
+| trees        | 2     | Schema tree, flow tree (should be skipped)                |
+| mixed        | 1     | Multiple issue types in one file                          |
+| nested       | 2     | Deep nested boxes, tree inside box                        |
+| multi-column | 2     | Sequence diagram, branching flow                          |
+| deploy       | 1     | Pipeline with merge diagram                               |
+| edge-cases   | 5     | Empty file, no code blocks, unclosed, unicode, empty block|
 
 Total: 35 fixture directories, 105 test cases (3 tests x 35 fixtures).
 

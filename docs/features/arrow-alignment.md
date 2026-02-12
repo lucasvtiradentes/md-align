@@ -68,4 +68,4 @@ related docs:
 
 related sources:
 - src/mdalign/checks/arrows.py - check and fix implementation
-- src/mdalign/utils.py  - ARROW_CHARS, _is_standalone_arrow
+- src/mdalign/utils.py         - ARROW_CHARS, _is_standalone_arrow

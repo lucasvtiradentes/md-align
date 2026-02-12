@@ -70,5 +70,5 @@ related docs:
 
 related sources:
 - src/mdalign/checks/box_widths.py - check and fix implementation
-- src/mdalign/parser.py     - code block and box group detection
-- src/mdalign/utils.py      - BOX_CHARS, BOX_OPENERS, BOX_CLOSERS constants
+- src/mdalign/parser.py            - code block and box group detection
+- src/mdalign/utils.py             - BOX_CHARS, BOX_OPENERS, BOX_CLOSERS constants
