@@ -1,6 +1,6 @@
 # Arrow Alignment
 
-Module: `align_md_docs/arrows.py`
+Module: `src/mdalign/checks/arrows.py`
 
 ## What it does
 
@@ -67,5 +67,5 @@ related docs:
 - docs/architecture.md - runs last in fix pipeline
 
 related sources:
-- align_md_docs/arrows.py - check and fix implementation
-- align_md_docs/utils.py  - ARROW_CHARS, _is_standalone_arrow
+- src/mdalign/checks/arrows.py - check and fix implementation
+- src/mdalign/utils.py  - ARROW_CHARS, _is_standalone_arrow

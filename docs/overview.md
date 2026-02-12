@@ -1,6 +1,6 @@
 # Overview
 
-align-md-docs is a Python CLI tool that auto-fixes alignment issues in markdown documentation files containing box-drawing diagrams and tables. It detects and corrects six categories of alignment problems in code blocks that use Unicode box-drawing characters.
+mdalign is a Python CLI tool that auto-fixes alignment issues in markdown documentation files containing box-drawing diagrams, tables, and list descriptions. It detects and corrects seven categories of alignment problems.
 
 Repository: github.com/lucasvtiradentes/align-md-docs
 
@@ -21,6 +21,7 @@ Repository: github.com/lucasvtiradentes/align-md-docs
 | Arrow alignment    | Aligns standalone v/^ arrows with nearest box char       |
 | Pipe continuity    | Traces T-junctions to detect drifted connector pipes     |
 | Box walls          | Matches nested box right walls to opening/closing borders|
+| List descriptions  | Aligns separator dash in list item descriptions           |
 
 ## Doc index
 
@@ -40,11 +41,12 @@ Repository: github.com/lucasvtiradentes/align-md-docs
 | docs/features/pipe-continuity.md        | Pipe continuity from T-junctions module            |
 | docs/features/arrow-alignment.md        | Arrow-to-box alignment module                      |
 | docs/features/box-wall-checking.md      | Nested box wall validation module                  |
+| docs/features/list-desc-alignment.md    | List description alignment module                  |
 
 ---
 
 related sources:
 - README.md      - project description and usage instructions
 - pyproject.toml - package metadata, dependencies, scripts
-- align_md_docs/ - all source modules
+- src/mdalign/   - all source modules
 - tests/         - test suite and fixture data

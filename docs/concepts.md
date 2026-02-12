@@ -1,6 +1,6 @@
 # Concepts
 
-Core domain concepts used throughout align-md-docs.
+Core domain concepts used throughout mdalign.
 
 ## Box-drawing characters
 
@@ -91,7 +91,7 @@ Structures containing tree branch characters (`├──`, `└──`) without 
 
 ## Code blocks
 
-All checks operate exclusively within fenced code blocks (delimited by triple backticks). Content outside code fences is never modified.
+Most checks operate within fenced code blocks (delimited by triple backticks). The list_descs check operates on regular markdown lines outside code blocks, aligning separator dashes in grouped list items.
 
 ## Constants
 
@@ -115,5 +115,5 @@ related docs:
 - docs/features/box-wall-checking.md       - box wall checking implementation
 
 related sources:
-- align_md_docs/utils.py  - constant definitions and shared helpers
-- align_md_docs/parser.py - code block and box group detection
+- src/mdalign/utils.py  - constant definitions and shared helpers
+- src/mdalign/parser.py - code block and box group detection

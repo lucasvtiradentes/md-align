@@ -1,6 +1,6 @@
 # Box Wall Checking
 
-Module: `align_md_docs/box_walls.py`
+Module: `src/mdalign/checks/box_walls.py`
 
 ## What it does
 
@@ -92,5 +92,5 @@ related docs:
 - docs/architecture.md - position in convergence loop
 
 related sources:
-- align_md_docs/box_walls.py - check and fix implementation
-- align_md_docs/utils.py     - BOX_WALL_DRIFT, _find_box_closer, _find_nearby_wall, _shift_wall, _fix_closer
+- src/mdalign/checks/box_walls.py - check and fix implementation
+- src/mdalign/utils.py     - BOX_WALL_DRIFT, _find_box_closer, _find_nearby_wall, _shift_wall, _fix_closer

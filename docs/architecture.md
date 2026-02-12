@@ -1,6 +1,6 @@
 # Architecture
 
-align-md-docs is a pure Python CLI utility with a modular fix pipeline. Each alignment concern is isolated in its own module, all sharing a common check/fix interface.
+mdalign is a pure Python CLI utility with a modular fix pipeline. Each alignment concern is isolated in its own module, all sharing a common check/fix interface.
 
 ## Entry point
 
@@ -17,7 +17,7 @@ cli.main()
 
 ## Fix pipeline
 
-Fixes run in a specific order. Tables and box widths run once. Box walls, rails, and pipes run in a 3-iteration convergence loop. Arrows run last.
+Fixes run in a specific order. Tables and box widths run once. Box walls, rails, and pipes run in a 3-iteration convergence loop. Arrows and list descriptions run last.
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -41,21 +41,24 @@ Fixes run in a specific order. Tables and box widths run once. Box walls, rails,
 │                    arrows.fix                       │
 │                          │                          │
 │                          v                          │
+│                   list_descs.fix                    │
+│                          │                          │
+│                          v                          │
 │                    fixed lines[]                    │
 └─────────────────────────────────────────────────────┘
 ```
 
 ## Module dependency graph
 
-All fix modules depend on parser.py and utils.py. No fix module depends on another fix module.
+Most fix modules depend on parser.py and utils.py. No fix module depends on another fix module. list_descs.py is standalone (no shared imports).
 
 ```
-┌──────────────┐
-│   cli.py     │
-│  (main)      │
-└──────┬───────┘
-       │ imports all fix modules
-       v
+┌──────────────────┐
+│     cli.py       │
+│    (main)        │
+└────────┬─────────┘
+         │ imports all check modules
+         v
 ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
 │  tables.py   │  │ box_widths.py│  │ box_walls.py │
 └──────────────┘  └──────┬───────┘  └──────┬───────┘
@@ -69,11 +72,15 @@ All fix modules depend on parser.py and utils.py. No fix module depends on anoth
          ┌────────────┐    ┌───────────┐
          │ parser.py  │    │  utils.py │
          └────────────┘    └───────────┘
+
+┌──────────────┐
+│ list_descs.py│  (standalone, no shared deps)
+└──────────────┘
 ```
 
 ## Code block detection flow
 
-The parser identifies code blocks (``` fences) and groups consecutive lines containing box-drawing characters. Each fix module operates only within these detected groups.
+The parser identifies code blocks (``` fences) and groups consecutive lines containing box-drawing characters. Most fix modules operate only within these detected groups. The list_descs module operates on regular markdown lines outside code blocks.
 
 ```
 ┌───────────────────────────────────────┐
@@ -160,6 +167,6 @@ related docs:
 - docs/features/box-wall-checking.md       - box_walls.fix stage details
 
 related sources:
-- align_md_docs/cli.py    - entry point, pipeline orchestration
-- align_md_docs/parser.py - code block iteration, box line grouping
-- align_md_docs/utils.py  - constants, shared utility functions
+- src/mdalign/cli.py    - entry point, pipeline orchestration
+- src/mdalign/parser.py - code block iteration, box line grouping
+- src/mdalign/utils.py  - constants, shared utility functions
