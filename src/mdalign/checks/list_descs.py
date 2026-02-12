@@ -14,10 +14,28 @@ def _parse_line(raw):
     return item, desc
 
 
+def _in_code_block(lines):
+    inside = set()
+    in_code = False
+    for i, line in enumerate(lines):
+        if line.rstrip('\n').strip().startswith('```'):
+            in_code = not in_code
+            continue
+        if in_code:
+            inside.add(i)
+    return inside
+
+
 def _collect_groups(lines):
+    code_lines = _in_code_block(lines)
     groups = []
     current = []
     for i, line in enumerate(lines):
+        if i in code_lines:
+            if len(current) >= 2:
+                groups.append(current)
+            current = []
+            continue
         raw = line.rstrip('\n')
         parsed = _parse_line(raw)
         if parsed:
