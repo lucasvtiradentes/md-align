@@ -56,7 +56,7 @@ Input:                   Fixed:
 ---
 
 related docs:
-- docs/concepts.md - table column alignment concept
+- docs/concepts.md     - table column alignment concept
 - docs/architecture.md - position in fix pipeline
 
 related sources:

@@ -54,8 +54,8 @@ The fix order matters:
 2. box_widths.fix - must run before rail/wall fixes (sets line lengths)
 3. Convergence loop (max 3x):
    - box_walls.fix - adjusts corner and wall positions
-   - rails.fix - aligns vertical box char columns
-   - pipes.fix - realigns drifted connector pipes
+   - rails.fix     - aligns vertical box char columns
+   - pipes.fix     - realigns drifted connector pipes
 4. arrows.fix - runs last, depends on final box char positions
 
 ## Coding conventions
@@ -79,9 +79,9 @@ The fix order matters:
 
 related docs:
 - docs/architecture.md - fix pipeline flow and ordering
-- docs/concepts.md - domain terminology referenced here
+- docs/concepts.md     - domain terminology referenced here
 
 related sources:
-- align_md_docs/cli.py - pipeline orchestration, check/fix dispatch
-- align_md_docs/utils.py - shared constants and helpers
+- align_md_docs/cli.py    - pipeline orchestration, check/fix dispatch
+- align_md_docs/utils.py  - shared constants and helpers
 - align_md_docs/parser.py - code block detection shared by all modules

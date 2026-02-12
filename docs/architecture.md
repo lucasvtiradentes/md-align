@@ -151,15 +151,15 @@ Detection logic: has_branches AND NOT has_box_borders
 ---
 
 related docs:
-- docs/concepts.md - domain terminology used in pipeline stages
-- docs/features/table-alignment.md - tables.fix stage details
+- docs/concepts.md                         - domain terminology used in pipeline stages
+- docs/features/table-alignment.md         - tables.fix stage details
 - docs/features/box-width-normalization.md - box_widths.fix stage details
-- docs/features/rail-alignment.md - rails.fix stage details
-- docs/features/pipe-continuity.md - pipes.fix stage details
-- docs/features/arrow-alignment.md - arrows.fix stage details
-- docs/features/box-wall-checking.md - box_walls.fix stage details
+- docs/features/rail-alignment.md          - rails.fix stage details
+- docs/features/pipe-continuity.md         - pipes.fix stage details
+- docs/features/arrow-alignment.md         - arrows.fix stage details
+- docs/features/box-wall-checking.md       - box_walls.fix stage details
 
 related sources:
-- align_md_docs/cli.py - entry point, pipeline orchestration
+- align_md_docs/cli.py    - entry point, pipeline orchestration
 - align_md_docs/parser.py - code block iteration, box line grouping
-- align_md_docs/utils.py - constants, shared utility functions
+- align_md_docs/utils.py  - constants, shared utility functions

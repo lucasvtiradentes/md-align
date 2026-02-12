@@ -106,7 +106,7 @@ When given a directory, align-md-docs walks all subdirectories and collects ever
 
 related docs:
 - docs/architecture.md - fix pipeline details
-- docs/rules.md - module interface conventions
+- docs/rules.md        - module interface conventions
 
 related sources:
 - align_md_docs/cli.py - CLI implementation, argument parsing, file collection

@@ -61,7 +61,7 @@ A pipe is considered "isolated" (eligible for correction) only if both adjacent 
 ---
 
 related docs:
-- docs/concepts.md - pipe continuity concept and PIPE_DRIFT_MAX constant
+- docs/concepts.md     - pipe continuity concept and PIPE_DRIFT_MAX constant
 - docs/architecture.md - position in convergence loop
 
 related sources:

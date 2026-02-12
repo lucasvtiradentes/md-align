@@ -88,9 +88,9 @@ Each `┌` is processed left-to-right, top-to-bottom. After fixing a box, the co
 ---
 
 related docs:
-- docs/concepts.md - box walls concept and BOX_WALL_DRIFT constant
+- docs/concepts.md     - box walls concept and BOX_WALL_DRIFT constant
 - docs/architecture.md - position in convergence loop
 
 related sources:
 - align_md_docs/box_walls.py - check and fix implementation
-- align_md_docs/utils.py - BOX_WALL_DRIFT, _find_box_closer, _find_nearby_wall, _shift_wall, _fix_closer
+- align_md_docs/utils.py     - BOX_WALL_DRIFT, _find_box_closer, _find_nearby_wall, _shift_wall, _fix_closer

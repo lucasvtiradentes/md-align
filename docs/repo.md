@@ -81,11 +81,11 @@ make test
 ---
 
 related docs:
-- docs/cicd.md - CI pipeline that runs these tools
+- docs/cicd.md                    - CI pipeline that runs these tools
 - docs/guides/testing-strategy.md - how fixtures and tests work
 
 related sources:
 - pyproject.toml - package metadata, tool configs
-- Makefile - task runner targets
+- Makefile       - task runner targets
 - align_md_docs/ - source modules
-- tests/ - test suite and fixtures
+- tests/         - test suite and fixtures

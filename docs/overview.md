@@ -44,7 +44,7 @@ Repository: github.com/lucasvtiradentes/align-md-docs
 ---
 
 related sources:
-- README.md - project description and usage instructions
+- README.md      - project description and usage instructions
 - pyproject.toml - package metadata, dependencies, scripts
 - align_md_docs/ - all source modules
-- tests/ - test suite and fixture data
+- tests/         - test suite and fixture data

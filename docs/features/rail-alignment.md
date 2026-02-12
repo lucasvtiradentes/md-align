@@ -80,7 +80,7 @@ Format: `L{line} box char at col {actual}, expected col {target}`
 ---
 
 related docs:
-- docs/concepts.md - rail alignment concept and constants
+- docs/concepts.md     - rail alignment concept and constants
 - docs/architecture.md - position in convergence loop
 
 related sources:

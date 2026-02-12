@@ -106,14 +106,14 @@ All checks operate exclusively within fenced code blocks (delimited by triple ba
 ---
 
 related docs:
-- docs/architecture.md - how these concepts flow through the fix pipeline
-- docs/features/table-alignment.md - table alignment implementation
+- docs/architecture.md                     - how these concepts flow through the fix pipeline
+- docs/features/table-alignment.md         - table alignment implementation
 - docs/features/box-width-normalization.md - box width normalization implementation
-- docs/features/rail-alignment.md - rail alignment implementation
-- docs/features/arrow-alignment.md - arrow alignment implementation
-- docs/features/pipe-continuity.md - pipe continuity implementation
-- docs/features/box-wall-checking.md - box wall checking implementation
+- docs/features/rail-alignment.md          - rail alignment implementation
+- docs/features/arrow-alignment.md         - arrow alignment implementation
+- docs/features/pipe-continuity.md         - pipe continuity implementation
+- docs/features/box-wall-checking.md       - box wall checking implementation
 
 related sources:
-- align_md_docs/utils.py - constant definitions and shared helpers
+- align_md_docs/utils.py  - constant definitions and shared helpers
 - align_md_docs/parser.py - code block and box group detection
