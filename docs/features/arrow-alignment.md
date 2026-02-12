@@ -1,6 +1,6 @@
 # Arrow Alignment
 
-Module: `align_md_docs/arrows.py`
+Module: `src/mdalign/checks/arrows.py`
 
 ## What it does
 
@@ -63,9 +63,9 @@ This prevents matching `v` in words like "value" or `^` in expressions.
 ---
 
 related docs:
-- docs/concepts.md - arrow alignment concept
+- docs/concepts.md     - arrow alignment concept
 - docs/architecture.md - runs last in fix pipeline
 
 related sources:
-- align_md_docs/arrows.py - check and fix implementation
-- align_md_docs/utils.py - ARROW_CHARS, _is_standalone_arrow
+- src/mdalign/checks/arrows.py - check and fix implementation
+- src/mdalign/utils.py         - ARROW_CHARS, _is_standalone_arrow

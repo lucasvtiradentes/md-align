@@ -1,5 +1,5 @@
-from align_md_docs.parser import group_box_lines, iter_code_blocks
-from align_md_docs.utils import (
+from mdalign.parser import group_box_lines, iter_code_blocks
+from mdalign.utils import (
     BOX_CHARS,
     CLUSTER_THRESHOLD,
     RAIL_MAX_GAP,

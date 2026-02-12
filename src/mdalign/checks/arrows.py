@@ -1,5 +1,5 @@
-from align_md_docs.parser import iter_code_blocks
-from align_md_docs.utils import ARROW_CHARS, BOX_CHARS, _is_standalone_arrow
+from mdalign.parser import iter_code_blocks
+from mdalign.utils import ARROW_CHARS, BOX_CHARS, _is_standalone_arrow
 
 
 def check(lines):

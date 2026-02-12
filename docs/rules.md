@@ -1,14 +1,14 @@
 # Rules
 
-Design principles, conventions, and anti-patterns for align-md-docs.
+Design principles, conventions, and anti-patterns for mdalign.
 
 ## Design principles
 
-- Modular check/fix: each alignment concern lives in its own module (tables, box_widths, rails, arrows, pipes, box_walls)
+- Modular check/fix: each alignment concern lives in its own module (tables, box_widths, rails, arrows, pipes, box_walls, list_descs)
 - Common interface: every module exports `check(lines) -> list[str]` and `fix(lines) -> list[str]`
 - Iterative convergence: fixes that interact (box_walls, rails, pipes) run in a loop up to 3 times, stopping early if output stabilizes
 - Idempotent output: applying fix to already-fixed content produces identical output
-- Scope isolation: only content inside fenced code blocks is analyzed; outside text is never modified
+- Scope isolation: box-related checks operate inside fenced code blocks; list_descs operates on regular markdown lines (skipping code blocks)
 - Tree exclusion: tree-like structures (with branch chars but no box borders) are skipped to avoid false positives
 
 ## Module interface convention
@@ -54,9 +54,10 @@ The fix order matters:
 2. box_widths.fix - must run before rail/wall fixes (sets line lengths)
 3. Convergence loop (max 3x):
    - box_walls.fix - adjusts corner and wall positions
-   - rails.fix - aligns vertical box char columns
-   - pipes.fix - realigns drifted connector pipes
-4. arrows.fix - runs last, depends on final box char positions
+   - rails.fix     - aligns vertical box char columns
+   - pipes.fix     - realigns drifted connector pipes
+4. arrows.fix - depends on final box char positions
+5. list_descs.fix - runs last, independent of box fixes
 
 ## Coding conventions
 
@@ -72,16 +73,16 @@ The fix order matters:
 - Avoid modifying lines without validating width impact: changing a box char position affects all lines in the same box group
 - Do not apply fixes without detecting issues first: the fix pipeline only triggers when run_checks finds errors
 - Do not skip the convergence loop: box_walls, rails, and pipes interact; a single pass may leave drift
-- Do not process content outside code fences: text, headings, and inline code are never alignment targets
+- Do not process content outside code fences for box-related checks: list_descs is the only module that operates on regular markdown
 - Do not treat tree blocks as box diagrams: branch characters overlap with box chars but have different semantics
 
 ---
 
 related docs:
 - docs/architecture.md - fix pipeline flow and ordering
-- docs/concepts.md - domain terminology referenced here
+- docs/concepts.md     - domain terminology referenced here
 
 related sources:
-- align_md_docs/cli.py - pipeline orchestration, check/fix dispatch
-- align_md_docs/utils.py - shared constants and helpers
-- align_md_docs/parser.py - code block detection shared by all modules
+- src/mdalign/cli.py    - pipeline orchestration, check/fix dispatch
+- src/mdalign/utils.py  - shared constants and helpers
+- src/mdalign/parser.py - code block detection shared by most modules

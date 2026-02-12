@@ -8,14 +8,14 @@ source .venv/bin/activate
 pip install -e ".[dev]"
 ```
 
-The `align-md-docs` command becomes available after installation via the entry point defined in pyproject.toml.
+The `mdalign` command becomes available after installation via the entry point defined in pyproject.toml.
 
 ## Commands
 
 ### Auto-fix mode (default)
 
 ```
-align-md-docs <file_or_folder>
+mdalign <file_or_folder>
 ```
 
 - Reads each .md file, detects alignment issues, writes corrected output in-place
@@ -26,7 +26,7 @@ align-md-docs <file_or_folder>
 ### Check-only mode
 
 ```
-align-md-docs --check <file_or_folder>
+mdalign --check <file_or_folder>
 ```
 
 - Detects alignment issues without writing any changes
@@ -36,8 +36,8 @@ align-md-docs --check <file_or_folder>
 ### Help and version
 
 ```
-align-md-docs --help
-align-md-docs --version
+mdalign --help
+mdalign --version
 ```
 
 ## Exit codes
@@ -51,7 +51,7 @@ align-md-docs --version
 
 ```
 ┌────────────────────────────────┐
-│  align-md-docs <path>          │
+│  mdalign <path>          │
 └────────────┬───────────────────┘
              │
              v
@@ -100,13 +100,13 @@ path/to/other.md: 1 unfixable issue(s):
 
 ## Recursive scanning
 
-When given a directory, align-md-docs walks all subdirectories and collects every `.md` file. Files are processed in sorted order. The path passed to _collect_files is converted to absolute via os.path.abspath.
+When given a directory, mdalign walks all subdirectories and collects every `.md` file. Files are processed in sorted order. The path passed to _collect_files is converted to absolute via os.path.abspath.
 
 ---
 
 related docs:
 - docs/architecture.md - fix pipeline details
-- docs/rules.md - module interface conventions
+- docs/rules.md        - module interface conventions
 
 related sources:
-- align_md_docs/cli.py - CLI implementation, argument parsing, file collection
+- src/mdalign/cli.py - CLI implementation, argument parsing, file collection

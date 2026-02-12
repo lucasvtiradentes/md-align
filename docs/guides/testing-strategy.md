@@ -18,21 +18,32 @@ Three test functions run for every fixture directory:
 
 ## Fixture categories
 
-| Category     | Count | Tests                                         |
-|--------------|-------|-----------------------------------------------|
-| tables       | 1     | Column width mismatches                       |
-| box-widths   | 2     | Trailing space, border vs content length      |
-| box-walls    | 3     | Short wall, inner displaced, nested cascade   |
-| rails        | 1     | Column drift in vertical alignment            |
-| arrows       | 1     | v-arrow shift alignment                       |
-| pipes        | 1     | Pipe drift from T-junction                    |
-| trees        | 2     | Schema tree, flow tree (should be skipped)    |
-| mixed        | 1     | Multiple issue types in one file              |
-| nested       | 2     | Deep nested boxes, tree inside box            |
-| multi-column | 2     | Sequence diagram, branching flow              |
-| deploy       | 1     | Pipeline with merge diagram                   |
+Fixtures are organized into two groups:
 
-Total: 17 fixture directories, 51 test cases (3 tests x 17 fixtures).
+checks/ - per-module fixtures (1:1 with src/mdalign/checks/):
+
+| Category     | Count | Tests                                                             |
+|--------------|-------|-------------------------------------------------------------------|
+| tables       | 3     | col-mismatch, fp-aligned-table, fp-pipe-in-text                   |
+| box-widths   | 3     | trailing-space, border-vs-content, fp-consistent-width            |
+| box-walls    | 4     | short-wall, inner-displaced, nested-cascade, fp-aligned           |
+| rails        | 2     | column-drift, fp-aligned-rails                                    |
+| arrows       | 3     | v-arrow-shift, fp-arrow-in-text, fp-already-aligned               |
+| pipes        | 2     | pipe-drift, fp-aligned-pipes                                      |
+| list-descs   | 5     | basic, fp-single-item, fp-hyphenated, fp-non-consec, fp-code-block|
+
+general/ - integration and edge case fixtures:
+
+| Category     | Count | Tests                                                     |
+|--------------|-------|-----------------------------------------------------------|
+| trees        | 2     | Schema tree, flow tree (should be skipped)                |
+| mixed        | 1     | Multiple issue types in one file                          |
+| nested       | 2     | Deep nested boxes, tree inside box                        |
+| multi-column | 2     | Sequence diagram, branching flow                          |
+| deploy       | 1     | Pipeline with merge diagram                               |
+| edge-cases   | 5     | Empty file, no code blocks, unclosed, unicode, empty block|
+
+Total: 35 fixture directories, 105 test cases (3 tests x 35 fixtures).
 
 ## Test flow
 
@@ -62,7 +73,7 @@ tests/fixtures/
 
 ## Adding new fixtures
 
-1. Create a new directory under tests/fixtures/{category}/{nn-name}/
+1. Create a new directory under tests/fixtures/checks/{module}/{nn-name}/ or tests/fixtures/general/{category}/{nn-name}/
 2. Add input.md with the broken alignment
 3. Add expected.md with the correct alignment
 4. Tests auto-discover the new fixture on next pytest run
@@ -75,4 +86,4 @@ related docs:
 
 related sources:
 - tests/test_align.py - test function definitions
-- tests/fixtures/ - all fixture directories
+- tests/fixtures/     - all fixture directories

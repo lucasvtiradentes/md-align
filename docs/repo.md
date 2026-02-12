@@ -11,31 +11,24 @@
 
 ```
 align-md-docs/
-├── align_md_docs/
+├── src/mdalign/
 │   ├── __init__.py        re-exports run_checks, run_fixes
 │   ├── cli.py             main entrypoint, arg parsing, orchestration
 │   ├── parser.py          iter_code_blocks, group_box_lines
 │   ├── utils.py           constants (BOX_CHARS, thresholds), shared helpers
-│   ├── tables.py          table column alignment check/fix
-│   ├── box_widths.py      box line width normalization check/fix
-│   ├── box_walls.py       nested box wall alignment check/fix
-│   ├── rails.py           vertical rail alignment check/fix
-│   ├── arrows.py          arrow-to-box alignment check/fix
-│   └── pipes.py           pipe continuity check/fix
+│   └── checks/
+│       ├── tables.py      table column alignment check/fix
+│       ├── box_widths.py  box line width normalization check/fix
+│       ├── box_walls.py   nested box wall alignment check/fix
+│       ├── rails.py       vertical rail alignment check/fix
+│       ├── arrows.py      arrow-to-box alignment check/fix
+│       ├── pipes.py       pipe continuity check/fix
+│       └── list_descs.py  list description separator alignment check/fix
 ├── tests/
 │   ├── test_align.py      parametrized test suite
-│   └── fixtures/           test fixture directories
-│       ├── tables/         1 fixture (col-mismatch)
-│       ├── box-widths/     2 fixtures (trailing-space, border-vs-content)
-│       ├── box-walls/      3 fixtures (short-wall, inner-displaced, nested-cascade)
-│       ├── rails/          1 fixture (column-drift)
-│       ├── arrows/         1 fixture (v-arrow-shift)
-│       ├── pipes/          1 fixture (pipe-drift)
-│       ├── trees/          2 fixtures (schema-tree, flow-tree)
-│       ├── mixed/          1 fixture (multi-issue)
-│       ├── nested/         2 fixtures (deep-nested, tree-inside-box)
-│       ├── multi-column/   2 fixtures (sequence-diagram, branching-flow)
-│       └── deploy/         1 fixture (pipeline-with-merge)
+│   └── fixtures/
+│       ├── checks/        per-module fixtures (arrows, box-walls, etc.)
+│       └── general/       integration fixtures (deploy, mixed, nested, etc.)
 ├── .github/workflows/
 │   ├── callable-ci.yml    reusable CI workflow (check + test)
 │   ├── prs.yml            PR trigger → callable-ci
@@ -81,11 +74,11 @@ make test
 ---
 
 related docs:
-- docs/cicd.md - CI pipeline that runs these tools
+- docs/cicd.md                    - CI pipeline that runs these tools
 - docs/guides/testing-strategy.md - how fixtures and tests work
 
 related sources:
 - pyproject.toml - package metadata, tool configs
-- Makefile - task runner targets
-- align_md_docs/ - source modules
-- tests/ - test suite and fixtures
+- Makefile       - task runner targets
+- src/mdalign/   - source modules
+- tests/         - test suite and fixtures

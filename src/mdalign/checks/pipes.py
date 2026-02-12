@@ -1,5 +1,5 @@
-from align_md_docs.parser import iter_code_blocks
-from align_md_docs.utils import BOX_CHARS, PIPE_DRIFT_MAX, _find_nearby_isolated_pipe, _is_tree_block, _shift_pipe
+from mdalign.parser import iter_code_blocks
+from mdalign.utils import BOX_CHARS, PIPE_DRIFT_MAX, _find_nearby_isolated_pipe, _is_tree_block, _shift_pipe
 
 
 def check(lines):

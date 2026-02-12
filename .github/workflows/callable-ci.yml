@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -e ".[dev]"
-      - run: align-md-docs --check docs/
+      - run: mdalign --check docs/
 
   test:
     runs-on: ubuntu-latest
