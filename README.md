@@ -12,7 +12,13 @@ Auto-fix alignment issues in markdown documentation files containing box-drawing
 6. Box walls       - verifies nested box right walls match their opening/closing borders
 7. List descs      - aligns the separator dash in list item descriptions
 
-## Setup
+## Install
+
+```bash
+pip install mdalign
+```
+
+For local development:
 
 ```bash
 python3 -m venv .venv
