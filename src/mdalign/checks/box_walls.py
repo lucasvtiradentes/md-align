@@ -3,6 +3,7 @@ from mdalign.utils import (
     BOX_CHARS,
     BOX_WALL_DRIFT,
     _find_box_closer,
+    _find_nearby_closer_start,
     _find_nearby_wall,
     _fix_closer,
     _is_tree_block,
@@ -43,10 +44,16 @@ def _check_box_walls(code_lines):
                 continue
 
             closing_idx = None
+            fuzzy_col_left = None
             for si in range(idx + 1, len(code_lines)):
                 _, sraw = code_lines[si]
                 if col_left < len(sraw) and sraw[col_left] == "└":
                     closing_idx = si
+                    break
+                nc = _find_nearby_closer_start(sraw, col_left, col_right_open)
+                if nc is not None:
+                    closing_idx = si
+                    fuzzy_col_left = nc
                     break
 
             if closing_idx is None or closing_idx - idx < 3:
@@ -54,7 +61,15 @@ def _check_box_walls(code_lines):
                 continue
 
             closing_line_idx, closing_raw = code_lines[closing_idx]
-            col_right_close = _find_box_closer(closing_raw, "└", "┘", col_left)
+            actual_col_left = fuzzy_col_left if fuzzy_col_left is not None else col_left
+            col_right_close = _find_box_closer(closing_raw, "└", "┘", actual_col_left)
+
+            if fuzzy_col_left is not None:
+                errors.append(
+                    f"L{closing_line_idx + 1} box └ at col {fuzzy_col_left}, "
+                    f"expected col {col_left} "
+                    f"(box ┌ at L{line_idx + 1} col {col_left})"
+                )
 
             if col_right_close is not None:
                 if abs(col_right_close - col_right_open) > BOX_WALL_DRIFT:
@@ -115,11 +130,17 @@ def _fix_box_walls_in_block(code_indices, all_lines):
                 continue
 
             closing_idx = None
+            fuzzy_col_left = None
             for si in range(idx + 1, len(code_lines)):
                 si_idx = code_lines[si][0]
                 sraw = all_lines[si_idx].rstrip("\n")
                 if col_left < len(sraw) and sraw[col_left] == "└":
                     closing_idx = si
+                    break
+                nc = _find_nearby_closer_start(sraw, col_left, col_right_open)
+                if nc is not None:
+                    closing_idx = si
+                    fuzzy_col_left = nc
                     break
 
             if closing_idx is None or closing_idx - idx < 3:
@@ -128,7 +149,8 @@ def _fix_box_walls_in_block(code_indices, all_lines):
 
             closing_line_idx = code_lines[closing_idx][0]
             closing_raw = all_lines[closing_line_idx].rstrip("\n")
-            col_right_close = _find_box_closer(closing_raw, "└", "┘", col_left)
+            actual_col_left = fuzzy_col_left if fuzzy_col_left is not None else col_left
+            col_right_close = _find_box_closer(closing_raw, "└", "┘", actual_col_left)
 
             if col_right_close is not None:
                 if abs(col_right_close - col_right_open) > BOX_WALL_DRIFT:
@@ -139,6 +161,26 @@ def _fix_box_walls_in_block(code_indices, all_lines):
                 expected_right = col_right_open
 
             changed = False
+
+            if fuzzy_col_left is not None:
+                from mdalign.utils import _realign_box_chars
+                cur = all_lines[closing_line_idx].rstrip("\n")
+                actual_positions = [k for k, c in enumerate(cur) if c in BOX_CHARS]
+                expected_positions = []
+                for ap in actual_positions:
+                    if ap == fuzzy_col_left:
+                        expected_positions.append(col_left)
+                    elif ap == col_right_close and col_right_close is not None:
+                        expected_positions.append(col_right_open)
+                    else:
+                        expected_positions.append(ap)
+                fixed = _realign_box_chars(cur, actual_positions, expected_positions).rstrip(" ")
+                if fixed != cur:
+                    all_lines[closing_line_idx] = fixed + "\n"
+                    closing_raw = fixed
+                    col_right_close = col_right_open
+                    expected_right = col_right_open
+                    changed = True
 
             if col_right_open != expected_right:
                 fixed = _fix_closer(raw, col_right_open, expected_right, "┐")

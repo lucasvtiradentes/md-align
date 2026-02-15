@@ -94,6 +94,11 @@ def _fix_line_width(raw, target_width):
     if delta == 0:
         return raw
 
+    if delta < 0:
+        trailing = len(raw) - len(raw.rstrip(" "))
+        if trailing >= abs(delta):
+            return raw[: current + delta]
+
     stripped = raw.strip()
     if not stripped:
         return raw

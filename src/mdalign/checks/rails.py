@@ -198,9 +198,40 @@ def _build_corrections(rails):
 
 
 def _apply_corrections(group, all_lines, corrections):
+    failed = {}
     for i, raw in group:
         actual = [j for j, c in enumerate(raw) if c in BOX_CHARS]
         expected = [corrections.get((i, j), j) for j in actual]
+        if actual == expected:
+            continue
+        fixed = _realign_box_chars(raw, actual, expected)
+        if fixed != raw:
+            all_lines[i] = fixed + "\n"
+        else:
+            for a, e in zip(actual, expected):
+                if a != e:
+                    failed[(i, a)] = e
+
+    if not failed:
+        return
+
+    group_now = [(i, all_lines[i].rstrip("\n")) for i, _ in group]
+
+    reverse = {}
+    for (failed_line, failed_col), target_col in failed.items():
+        for i, raw in group_now:
+            if i == failed_line:
+                continue
+            box_positions = [j for j, c in enumerate(raw) if c in BOX_CHARS]
+            if target_col in box_positions:
+                reverse[(i, target_col)] = failed_col
+
+    if not reverse:
+        return
+
+    for i, raw in group_now:
+        actual = [j for j, c in enumerate(raw) if c in BOX_CHARS]
+        expected = [reverse.get((i, j), j) for j in actual]
         if actual == expected:
             continue
         fixed = _realign_box_chars(raw, actual, expected)

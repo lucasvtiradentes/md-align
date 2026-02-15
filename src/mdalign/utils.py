@@ -167,7 +167,7 @@ def _realign_box_chars(raw, actual, expected):
         elif i < n:
             expected_widths.append(expected[i] - expected[i - 1] - 1)
         else:
-            expected_widths.append(len(raw) - expected[-1] - 1)
+            expected_widths.append(max(0, len(raw) - expected[-1] - 1))
 
     new_segments = []
     for seg, exp_w in zip(segments, expected_widths):
@@ -199,6 +199,21 @@ def _realign_box_chars(raw, actual, expected):
             result.append(chars[i])
 
     return "".join(result)
+
+
+BOX_WALL_CLOSER_DRIFT = 2
+
+
+def _find_nearby_closer_start(raw, col_left, col_right_open, max_drift=BOX_WALL_CLOSER_DRIFT):
+    for dc in range(1, max_drift + 1):
+        for sign in [-1, 1]:
+            nc = col_left + sign * dc
+            if nc < 0 or nc >= len(raw) or raw[nc] != "└":
+                continue
+            close_col = _find_box_closer(raw, "└", "┘", nc)
+            if close_col is not None and abs(close_col - col_right_open) <= max_drift + abs(sign * dc):
+                return nc
+    return None
 
 
 def _is_standalone_arrow(raw, j):
