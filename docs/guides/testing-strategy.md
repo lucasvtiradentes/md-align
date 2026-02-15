@@ -31,7 +31,7 @@ checks/ - per-module fixtures (1:1 with src/mdalign/checks/):
 | box-walls    | 7     | short-wall, inner-displaced, nested-cascade, + 4 more              |
 | horiz-arrows | 7     | right-gap, left-gap, fp-touching, both-directions, + 3 more        |
 | rails        | 3     | column-drift, fp-aligned-rails, multi-box-arrows                   |
-| arrows       | 3     | v-arrow-shift, fp-arrow-in-text, fp-already-aligned                |
+| arrows       | 5     | v-arrow-shift, fp-arrow-in-text, fp-already-aligned, + 2 more      |
 | pipes        | 2     | pipe-drift, fp-aligned-pipes                                       |
 | list-descs   | 5     | basic, fp-single-item, fp-hyphenated, fp-non-consec, fp-code-block |
 | def-lists    | 6     | basic, fp-single-item, fp-url-in-value, + 3 more                   |
@@ -50,7 +50,7 @@ general/ - integration and edge case fixtures:
 | deploy       | 1     | Pipeline with merge diagram                               |
 | edge-cases   | 5     | Empty file, no code blocks, unclosed, unicode, empty block|
 
-Total: 67 fixture directories, 201 test cases (3 tests x 67 fixtures).
+Total: 69 fixture directories, 207 test cases (3 tests x 69 fixtures).
 
 ## Test flow
 
@@ -83,7 +83,8 @@ tests/fixtures/
 1. Create a new directory under tests/fixtures/checks/{module}/{nn-name}/ or tests/fixtures/general/{category}/{nn-name}/
 2. Add input.md with the broken alignment
 3. Add expected.md with the correct alignment
-4. Tests auto-discover the new fixture on next pytest run
+4. For unfixable issues (check-only, no auto-fix): set input.md == expected.md and add an empty `check_only` marker file
+5. Tests auto-discover the new fixture on next pytest run
 
 ---
 

@@ -117,7 +117,7 @@ When docs are visually harmonious - with aligned columns, consistent box widths,
   - [Box padding](tests/fixtures/checks/box-padding)        - normalizes left-padding of content lines inside boxes
   - [Horizontal arrows](tests/fixtures/checks/horiz-arrows) - closes gaps between `─>` / `<─` arrow tips and box walls
   - [Rail alignment](tests/fixtures/checks/rails)           - aligns vertically adjacent box chars to the same column
-  - [Arrow alignment](tests/fixtures/checks/arrows)         - aligns standalone `v`/`^` arrows with the nearest box char above/below
+  - [Arrow alignment](tests/fixtures/checks/arrows)         - aligns standalone `v`/`^` arrows; detects `v`/`^` embedded in borders
   - [Pipe continuity](tests/fixtures/checks/pipes)          - traces from T-junctions to detect drifted connector pipes
   - [Box spacing](tests/fixtures/checks/box-spacing)        - ensures minimum right-side spacing between content and box wall
   - [Box walls](tests/fixtures/checks/box-walls)            - verifies nested box right walls match their opening/closing borders

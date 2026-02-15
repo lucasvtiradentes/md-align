@@ -65,8 +65,12 @@ Standalone `v` and `^` characters (not embedded in words) act as directional arr
 ```
 Before:          After:
 ┌────┐           ┌────┐
-v                v  
+v                v
 ```
+
+## Embedded arrows
+
+Arrows (`v`/`^`) placed inside box border rows (adjacent to `─` chars, e.g. `┌────v──────┐`) are flagged as unfixable issues. The correct pattern is to place arrows on their own line, separate from the box border. This ensures other checks (rails, box-widths) can process the diagram correctly.
 
 ## Pipe continuity
 

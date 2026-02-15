@@ -20,12 +20,21 @@ def _check_arrows(code_lines):
     errors = []
     for idx, (i, raw) in enumerate(code_lines):
         for j, c in enumerate(raw):
-            if c not in ARROW_CHARS or not _is_standalone_arrow(raw, j):
+            if c not in ARROW_CHARS:
                 continue
-            expected = _find_arrow_target(code_lines, idx, j, c)
-            if expected is not None and expected != j:
-                errors.append(f"L{i + 1} arrow '{c}' at col {j}, expected col {expected}")
+            if _is_standalone_arrow(raw, j):
+                expected = _find_arrow_target(code_lines, idx, j, c)
+                if expected is not None and expected != j:
+                    errors.append(f"L{i + 1} arrow '{c}' at col {j}, expected col {expected}")
+            elif _is_embedded_arrow(raw, j):
+                errors.append(f"L{i + 1} arrow '{c}' embedded in border at col {j}")
     return errors
+
+
+def _is_embedded_arrow(raw, j):
+    left = raw[j - 1] if j > 0 else " "
+    right = raw[j + 1] if j < len(raw) - 1 else " "
+    return left == "─" or right == "─"
 
 
 def _find_arrow_target(code_lines, arrow_idx, arrow_col, arrow_char):

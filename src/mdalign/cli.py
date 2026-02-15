@@ -82,7 +82,7 @@ Checks and fixes:
   4. Box spacing      - ensures at least 1 space between content and box walls
   5. Horiz arrows     - closes gaps between arrow tips and box walls
   6. Rail alignment   - aligns vertically adjacent box chars to the same column
-  7. Arrow alignment  - aligns standalone v/^ arrows with the nearest box char above/below
+  7. Arrow alignment  - aligns standalone v/^ arrows; detects embedded arrows in borders
   8. Pipe continuity  - traces from T-junctions to detect drifted connector pipes
   9. Box walls        - verifies nested box right walls match their opening/closing borders
  10. List descs       - aligns the separator dash in list item descriptions

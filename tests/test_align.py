@@ -2,11 +2,9 @@ from pathlib import Path
 
 import pytest
 
-from mdalign.checks import wide_chars
 from mdalign.cli import run_checks, run_fixes
 
 FIXTURES = Path(__file__).parent / "fixtures"
-CHECK_ONLY_MODULES = {"wide-chars": wide_chars}
 
 
 def collect_fixtures():
@@ -15,11 +13,7 @@ def collect_fixtures():
 
 
 def _is_check_only(fixture_dir):
-    rel = fixture_dir.relative_to(FIXTURES).as_posix()
-    parts = rel.split("/")
-    if len(parts) >= 2 and parts[0] == "checks":
-        return parts[1] in CHECK_ONLY_MODULES
-    return False
+    return (fixture_dir / "check_only").exists()
 
 
 @pytest.mark.parametrize("fixture_dir", collect_fixtures())

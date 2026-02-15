@@ -21,7 +21,7 @@ Repository: github.com/lucasvtiradentes/md-align
 | Box spacing        | Ensures minimum right-side spacing between content and wall|
 | Horizontal arrows  | Closes gaps between arrow tips and box walls               |
 | Rail alignment     | Aligns vertically adjacent box chars to the same column    |
-| Arrow alignment    | Aligns standalone v/^ arrows with nearest box char         |
+| Arrow alignment    | Aligns standalone v/^ arrows; detects embedded arrows      |
 | Pipe continuity    | Traces T-junctions to detect drifted connector pipes       |
 | Box walls          | Matches nested box right walls to opening/closing borders  |
 | List descriptions  | Aligns separator dash in list item descriptions            |
