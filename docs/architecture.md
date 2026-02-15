@@ -17,40 +17,47 @@ cli.main()
 
 ## Fix pipeline
 
-Fixes run in a specific order. Tables and box widths run once. Box walls, rails, and pipes run in a 3-iteration convergence loop. Arrows and list descriptions run last.
+Fixes run in a specific order. Tables, box widths, box padding, and horiz arrows run once. Box spacing, box widths, box walls, rails, and pipes run in a 3-iteration convergence loop. Arrows, list descriptions, and definition lists run last.
 
 ```
-┌─────────────────────────────────────────────────────┐
-│                   Fix Pipeline                      │
-│                                                     │
-│  lines[] ─── tables.fix ─── box_widths.fix ───┐     │
-│                                               │     │
-│         ┌─────────────────────────────────────┘     │
-│         │                                           │
-│         │   ┌─────────────────────────────────┐     │
-│         └──>│  Convergence Loop (max 3x)      │     │
-│             │                                 │     │
-│             │  box_walls.fix ─── rails.fix    │     │
-│             │       │                │        │     │
-│             │       └── pipes.fix ───┘        │     │
-│             │                                 │     │
-│             │  break if output == previous    │     │
-│             └─────────────────────────────────┘     │
-│                          │                          │
-│                          v                          │
-│                    arrows.fix                       │
-│                          │                          │
-│                          v                          │
-│                   list_descs.fix                    │
-│                          │                          │
-│                          v                          │
-│                    fixed lines[]                    │
-└─────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│                        Fix Pipeline                          │
+│                                                              │
+│  lines[] ── tables ── box_widths ── box_padding ──┐          │
+│                                                   │          │
+│         ┌─────────────────────────────────────────┘          │
+│         │                                                    │
+│         └── horiz_arrows ──┐                                 │
+│                          │                                   │
+│         ┌──────────────────┘                                 │
+│         │                                                    │
+│         │   ┌──────────────────────────────────────────┐     │
+│         └──>│  Convergence Loop (max 3x)               │     │
+│             │                                          │     │
+│             │  box_spacing ── box_widths ── box_walls  │     │
+│             │       │                         │        │     │
+│             │       └── rails ── pipes ───────┘        │     │
+│             │                                          │     │
+│             │  break if output == previous             │     │
+│             └──────────────────────────────────────────┘     │
+│                          │                                   │
+│                          v                                   │
+│                    arrows.fix                                │
+│                          │                                   │
+│                          v                                   │
+│                   list_descs.fix                             │
+│                          │                                   │
+│                          v                                   │
+│                   def_lists.fix                              │
+│                          │                                   │
+│                          v                                   │
+│                    fixed lines[]                             │
+└──────────────────────────────────────────────────────────────┘
 ```
 
 ## Module dependency graph
 
-Most fix modules depend on parser.py and utils.py. No fix module depends on another fix module. list_descs.py is standalone (no shared imports).
+Most fix modules depend on parser.py and utils.py. No fix module depends on another fix module. list_descs.py and def_lists.py are standalone (no shared imports).
 
 ```
 ┌──────────────────┐
@@ -59,23 +66,31 @@ Most fix modules depend on parser.py and utils.py. No fix module depends on anot
 └────────┬─────────┘
          │ imports all check modules
          v
-┌──────────────┐  ┌───────────────┐  ┌──────────────┐
-│  tables.py   │  │ box_widths.py │  │ box_walls.py │
-└──────────────┘  └──────┬────────┘  └──────┬───────┘
-                         │                  │
-┌──────────────┐  ┌──────┴────────┐  ┌──────┴───────┐
-│  arrows.py   │  │  rails.py     │  │  pipes.py    │
-└──────┬───────┘  └──────┬────────┘  └─────┬────────┘
-       │                 │                 │
-       └────────┬────────┴────────┬────────┘
+┌──────────────┐  ┌────────────────┐  ┌──────────────┐
+│  tables.py   │  │ box_widths.py  │  │ box_walls.py │
+└──────────────┘  └──────┬─────────┘  └──────┬───────┘
+                         │                   │
+┌──────────────┐  ┌──────┴─────────┐  ┌──────┴───────┐
+│  arrows.py   │  │  rails.py      │  │  pipes.py    │
+└──────┬───────┘  └──────┬─────────┘  └─────┬────────┘
+       │                 │                  │
+┌──────┴────────┐  ┌─────┴──────────┐       │
+│box_padding.py │  │box_spacing.py  │       │
+└──────┬────────┘  └─────┬──────────┘       │
+       │                 │                  │
+┌──────┴───────┐         │                  │
+│horiz_arrows  │         │                  │
+└──────┬───────┘         │                  │
+       │                 │                  │
+       └────────┬────────┴────────┬─────────┘
                 v                 v
          ┌────────────┐    ┌───────────┐
          │ parser.py  │    │  utils.py │
          └────────────┘    └───────────┘
 
-┌───────────────┐
-│ list_descs.py │  (standalone, no shared deps)
-└───────────────┘
+┌───────────────┐  ┌───────────────┐
+│ list_descs.py │  │ def_lists.py  │  (standalone, no shared deps)
+└───────────────┘  └───────────────┘
 ```
 
 ## Code block detection flow
@@ -170,3 +185,4 @@ related sources:
 - src/mdalign/cli.py    - entry point, pipeline orchestration
 - src/mdalign/parser.py - code block iteration, box line grouping
 - src/mdalign/utils.py  - constants, shared utility functions
+- src/mdalign/checks/   - all check/fix modules

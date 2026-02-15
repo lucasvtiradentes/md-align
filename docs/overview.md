@@ -1,8 +1,8 @@
 # Overview
 
-mdalign is a Python CLI tool that auto-fixes alignment issues in markdown documentation files containing box-drawing diagrams, tables, and list descriptions. It detects and corrects seven categories of alignment problems.
+mdalign is a Python CLI tool that auto-fixes alignment issues in markdown documentation files containing box-drawing diagrams, tables, and list descriptions. It detects and corrects eleven categories of alignment problems.
 
-Repository: github.com/lucasvtiradentes/align-md-docs
+Repository: github.com/lucasvtiradentes/md-align
 
 ## What it does
 
@@ -13,15 +13,19 @@ Repository: github.com/lucasvtiradentes/align-md-docs
 
 ## Fix categories
 
-| Category           | Description                                              |
-|--------------------|----------------------------------------------------------|
-| Table alignment    | Pads table cells to match separator row column widths    |
-| Box widths         | Normalizes all lines in a box group to equal length      |
-| Rail alignment     | Aligns vertically adjacent box chars to the same column  |
-| Arrow alignment    | Aligns standalone v/^ arrows with nearest box char       |
-| Pipe continuity    | Traces T-junctions to detect drifted connector pipes     |
-| Box walls          | Matches nested box right walls to opening/closing borders|
-| List descriptions  | Aligns separator dash in list item descriptions          |
+| Category           | Description                                                |
+|--------------------|------------------------------------------------------------|
+| Table alignment    | Pads table cells to match separator row column widths      |
+| Box widths         | Normalizes all lines in a box group to equal length        |
+| Box padding        | Normalizes left-padding of content lines inside boxes      |
+| Box spacing        | Ensures minimum right-side spacing between content and wall|
+| Horizontal arrows  | Closes gaps between arrow tips and box walls               |
+| Rail alignment     | Aligns vertically adjacent box chars to the same column    |
+| Arrow alignment    | Aligns standalone v/^ arrows with nearest box char         |
+| Pipe continuity    | Traces T-junctions to detect drifted connector pipes       |
+| Box walls          | Matches nested box right walls to opening/closing borders  |
+| List descriptions  | Aligns separator dash in list item descriptions            |
+| Definition lists   | Aligns the colon separator in key: value list items        |
 
 ## Doc index
 
@@ -41,7 +45,7 @@ Repository: github.com/lucasvtiradentes/align-md-docs
 | docs/features/pipe-continuity.md        | Pipe continuity from T-junctions module            |
 | docs/features/arrow-alignment.md        | Arrow-to-box alignment module                      |
 | docs/features/box-wall-checking.md      | Nested box wall validation module                  |
-| docs/features/list-desc-alignment.md    | List description alignment module                  |
+| docs/guides/releasing.md                | Release process and changelog                      |
 
 ---
 

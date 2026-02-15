@@ -12,26 +12,44 @@ The `mdalign` command becomes available after installation via the entry point d
 
 ## Commands
 
-### Auto-fix mode (default)
+### Check-only mode (default)
 
 ```
 mdalign <file_or_folder>
 ```
 
-- Reads each .md file, detects alignment issues, writes corrected output in-place
-- Reports number of issues fixed per file
-- Reports unfixable issues if any remain after correction
-- Supports single files or recursive folder scanning via os.walk
-
-### Check-only mode
-
-```
-mdalign --check <file_or_folder>
-```
-
 - Detects alignment issues without writing any changes
 - Prints errors grouped by file with format: `L{line} {issue} (context)`
 - Returns non-zero exit code if issues found
+- `--check` flag also works as explicit alias
+
+### Auto-fix mode
+
+```
+mdalign --fix <file_or_folder>
+```
+
+- Reads each .md file, detects alignment issues, writes corrected output in-place
+- Reports number of issues fixed per file
+- Reports unfixable issues if any remain after correction
+
+### Diff mode
+
+```
+mdalign --diff <file_or_folder>
+```
+
+- Shows unified diff of what would change, without writing
+- Returns exit code 1 if diff is non-empty
+
+### Ignoring checks
+
+```
+mdalign --ignore tables,pipes <file_or_folder>
+```
+
+- Skips specific checks by name (comma-separated)
+- Valid names: tables, box-widths, box-padding, box-spacing, horiz-arrows, box-walls, rails, arrows, pipes, list-descs, def-lists
 
 ### Help and version
 
@@ -50,28 +68,28 @@ mdalign --version
 ## Execution flow
 
 ```
-┌────────────────────────────────┐
-│  mdalign <path>          │
-└────────────┬───────────────────┘
+┌────────────────────────────────────┐
+│  mdalign <path>                    │
+└────────────┬───────────────────────┘
              │
              v
-┌────────────────────────────────┐
-│  _collect_files(path)          │
-│  - single file: return [path]  │
-│  - directory: os.walk for .md  │
-└────────────┬───────────────────┘
+┌────────────────────────────────────┐
+│  _collect_files(path)              │
+│  - glob pattern: expand matches    │
+│  - single file: return [path]      │
+│  - directory: os.walk for .md      │
+└────────────┬───────────────────────┘
              │
              v
-┌────────────────────────────────┐
-│  For each .md file:            │
-│  1. Read lines                 │
-│  2. run_checks(lines)          │
-│  3. If errors and not --check: │
-│     a. run_fixes(lines)        │
-│     b. Write fixed output      │
-│     c. Re-read and recheck     │
-│     d. Report fixed/remaining  │
-└────────────────────────────────┘
+┌────────────────────────────────────┐
+│  For each .md file:                │
+│  1. Read lines                     │
+│  2. run_checks(lines)              │
+│  3. If errors:                     │
+│     --diff: show unified diff      │
+│     --fix:  fix + write + recheck  │
+│     else:   print errors (default) │
+└────────────────────────────────────┘
 ```
 
 ## Error output format

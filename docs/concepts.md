@@ -79,6 +79,18 @@ Before:          After:
    │               │
 ```
 
+## Box padding
+
+Content lines inside a box should have consistent left-padding (spaces between the left wall `│` and the first non-space character). When multiple content lines have different left-padding, the majority padding wins and outliers are corrected.
+
+## Box spacing
+
+Content lines inside a box must have at least 1 space between the content and the right box wall. When content touches the wall directly (0 right-padding), the box is expanded to add the minimum spacing.
+
+## Horizontal arrows
+
+Horizontal arrow patterns (`─>` / `<─`) connecting box walls should touch the wall characters without gaps. Spaces between an arrow tip and a box wall (`│`, `┐`, `┘`, `┤`) are detected and removed.
+
 ## Box walls
 
 Nested boxes have opening corners (`┌`/`└`) at the same left column, with matching right corners (`┐`/`┘`). Interior wall pipes (`│`) must align with these corners. An 8-column drift tolerance is used when matching right walls to their expected positions.
@@ -88,6 +100,10 @@ The fix cascades: correcting an outer box wall may shift inner content, requirin
 ## Tree blocks
 
 Structures containing tree branch characters (`├──`, `└──`) without box borders (`┌`, `┐`) are classified as tree blocks. These are excluded from all box-related checks to avoid false positives on directory listings and tree diagrams.
+
+## Definition lists
+
+Groups of consecutive list items matching the `- key: value` pattern form definition lists. The `:` separator is aligned across all items in the group by padding the key to match the longest key width. Single-item groups and items inside code blocks are skipped.
 
 ## Code blocks
 

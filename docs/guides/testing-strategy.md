@@ -22,15 +22,21 @@ Fixtures are organized into two groups:
 
 checks/ - per-module fixtures (1:1 with src/mdalign/checks/):
 
-| Category     | Count | Tests                                                             |
-|--------------|-------|-------------------------------------------------------------------|
-| tables       | 3     | col-mismatch, fp-aligned-table, fp-pipe-in-text                   |
-| box-widths   | 3     | trailing-space, border-vs-content, fp-consistent-width            |
-| box-walls    | 4     | short-wall, inner-displaced, nested-cascade, fp-aligned           |
-| rails        | 2     | column-drift, fp-aligned-rails                                    |
-| arrows       | 3     | v-arrow-shift, fp-arrow-in-text, fp-already-aligned               |
-| pipes        | 2     | pipe-drift, fp-aligned-pipes                                      |
-| list-descs   | 5     | basic, fp-single-item, fp-hyphenated, fp-non-consec, fp-code-block|
+| Category     | Count | Tests                                                              |
+|--------------|-------|--------------------------------------------------------------------|
+| tables       | 3     | col-mismatch, fp-aligned-table, fp-pipe-in-text                    |
+| box-widths   | 6     | trailing-space, border-vs-content, fp-consistent-width, + 3 more   |
+| box-padding  | 6     | inconsistent-pad, fp-consistent, nested-boxes, + 3 more            |
+| box-spacing  | 2     | content-touching-wall, fp-padded                                   |
+| box-walls    | 7     | short-wall, inner-displaced, nested-cascade, + 4 more              |
+| horiz-arrows | 7     | right-gap, left-gap, fp-touching, both-directions, + 3 more        |
+| rails        | 3     | column-drift, fp-aligned-rails, multi-box-arrows                   |
+| arrows       | 3     | v-arrow-shift, fp-arrow-in-text, fp-already-aligned                |
+| pipes        | 2     | pipe-drift, fp-aligned-pipes                                       |
+| list-descs   | 5     | basic, fp-single-item, fp-hyphenated, fp-non-consec, fp-code-block |
+| def-lists    | 6     | basic, fp-single-item, fp-url-in-value, + 3 more                   |
+
+all-checks/ - single combined fixture covering all 11 checks.
 
 general/ - integration and edge case fixtures:
 
@@ -43,7 +49,7 @@ general/ - integration and edge case fixtures:
 | deploy       | 1     | Pipeline with merge diagram                               |
 | edge-cases   | 5     | Empty file, no code blocks, unclosed, unicode, empty block|
 
-Total: 35 fixture directories, 105 test cases (3 tests x 35 fixtures).
+Total: 64 fixture directories, 192 test cases (3 tests x 64 fixtures).
 
 ## Test flow
 
@@ -67,7 +73,7 @@ tests/fixtures/
 
 ## CI integration
 
-- CI runs `pytest -v` on Python 3.12 (ubuntu-latest)
+- CI runs `pytest -v` on Python 3.9 + 3.12 matrix (ubuntu-latest)
 - ruff validates lint + format in a separate CI job
 - Makefile targets mirror CI: `make test` and `make check`
 

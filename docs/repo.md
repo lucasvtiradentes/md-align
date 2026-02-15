@@ -5,37 +5,43 @@
 - Python 3.9+ (no runtime dependencies)
 - Dev dependencies: pytest >= 7, ruff >= 0.9
 - Build system: hatchling
-- Package version: 0.1.0
+- Package version: 0.1.1
 
 ## Folder structure
 
 ```
-align-md-docs/
+md-align/
 ├── src/mdalign/
-│   ├── __init__.py        re-exports run_checks, run_fixes
-│   ├── cli.py             main entrypoint, arg parsing, orchestration
-│   ├── parser.py          iter_code_blocks, group_box_lines
-│   ├── utils.py           constants (BOX_CHARS, thresholds), shared helpers
+│   ├── __init__.py          re-exports run_checks, run_fixes
+│   ├── cli.py               main entrypoint, arg parsing, orchestration
+│   ├── parser.py            iter_code_blocks, group_box_lines
+│   ├── utils.py             constants (BOX_CHARS, thresholds), shared helpers
 │   └── checks/
-│       ├── tables.py      table column alignment check/fix
-│       ├── box_widths.py  box line width normalization check/fix
-│       ├── box_walls.py   nested box wall alignment check/fix
-│       ├── rails.py       vertical rail alignment check/fix
-│       ├── arrows.py      arrow-to-box alignment check/fix
-│       ├── pipes.py       pipe continuity check/fix
-│       └── list_descs.py  list description separator alignment check/fix
+│       ├── tables.py        table column alignment check/fix
+│       ├── box_widths.py    box line width normalization check/fix
+│       ├── box_padding.py   box content left-padding check/fix
+│       ├── box_spacing.py   box right-side spacing check/fix
+│       ├── box_walls.py     nested box wall alignment check/fix
+│       ├── horiz_arrows.py  horizontal arrow gap check/fix
+│       ├── rails.py         vertical rail alignment check/fix
+│       ├── arrows.py        arrow-to-box alignment check/fix
+│       ├── pipes.py         pipe continuity check/fix
+│       ├── list_descs.py    list description separator alignment check/fix
+│       └── def_lists.py     definition list colon alignment check/fix
 ├── tests/
-│   ├── test_align.py      parametrized test suite
+│   ├── test_align.py        parametrized test suite
 │   └── fixtures/
-│       ├── checks/        per-module fixtures (arrows, box-walls, etc.)
-│       └── general/       integration fixtures (deploy, mixed, nested, etc.)
+│       ├── all-checks/      combined fixture covering all checks
+│       ├── checks/          per-module fixtures (arrows, box-walls, etc.)
+│       └── general/         integration fixtures (deploy, mixed, nested, etc.)
 ├── .github/workflows/
-│   ├── callable-ci.yml    reusable CI workflow (check + test)
-│   ├── prs.yml            PR trigger → callable-ci
-│   └── push-to-main.yml   push trigger → callable-ci + deploy stub
-├── pyproject.toml          package config, scripts, tool settings
-├── Makefile                install, test, check targets
-└── README.md               project docs
+│   ├── callable-ci.yml      reusable CI workflow (check + practical-test + test)
+│   ├── prs.yml              PR trigger → callable-ci
+│   ├── push-to-main.yml     push trigger → callable-ci
+│   └── release.yml          manual release workflow (bump, changelog, PyPI)
+├── pyproject.toml            package config, scripts, tool settings
+├── Makefile                  install, test, check targets
+└── README.md                 project docs
 ```
 
 ## Tooling
