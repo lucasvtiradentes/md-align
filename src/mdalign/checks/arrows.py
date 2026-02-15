@@ -16,25 +16,37 @@ def fix(lines):
     return result
 
 
+HORIZ_ARROW_CHARS = {">", "<"}
+
+
 def _check_arrows(code_lines):
     errors = []
     for idx, (i, raw) in enumerate(code_lines):
         for j, c in enumerate(raw):
-            if c not in ARROW_CHARS:
-                continue
-            if _is_standalone_arrow(raw, j):
-                expected = _find_arrow_target(code_lines, idx, j, c)
-                if expected is not None and expected != j:
-                    errors.append(f"L{i + 1} arrow '{c}' at col {j}, expected col {expected}")
-            elif _is_embedded_arrow(raw, j):
+            if c in ARROW_CHARS:
+                if _is_standalone_arrow(raw, j):
+                    expected = _find_arrow_target(code_lines, idx, j, c)
+                    if expected is not None and expected != j:
+                        errors.append(f"L{i + 1} arrow '{c}' at col {j}, expected col {expected}")
+                elif _is_embedded_in_horiz_border(raw, j):
+                    errors.append(f"L{i + 1} arrow '{c}' embedded in border at col {j}")
+            elif c in HORIZ_ARROW_CHARS and _is_embedded_in_vert_border(code_lines, idx, j):
                 errors.append(f"L{i + 1} arrow '{c}' embedded in border at col {j}")
     return errors
 
 
-def _is_embedded_arrow(raw, j):
+def _is_embedded_in_horiz_border(raw, j):
     left = raw[j - 1] if j > 0 else " "
     right = raw[j + 1] if j < len(raw) - 1 else " "
     return left == "─" or right == "─"
+
+
+def _is_embedded_in_vert_border(code_lines, line_idx, col):
+    above = line_idx - 1
+    below = line_idx + 1
+    has_above = above >= 0 and col < len(code_lines[above][1]) and code_lines[above][1][col] == "│"
+    has_below = below < len(code_lines) and col < len(code_lines[below][1]) and code_lines[below][1][col] == "│"
+    return has_above or has_below
 
 
 def _find_arrow_target(code_lines, arrow_idx, arrow_col, arrow_char):
