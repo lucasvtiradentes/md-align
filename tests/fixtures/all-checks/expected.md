@@ -8,10 +8,10 @@
 ## box-widths - trailing space + border vs content
 
 ```
-┌──────────────┐
-│  Linear UI   │
-│  (userscript)│
-└──────────────┘
+┌───────────────┐
+│  Linear UI    │
+│  (userscript) │
+└───────────────┘
 ```
 
 ```
@@ -24,10 +24,10 @@
 ## box-widths - trailing spaces after box
 
 ```
-┌──────────┐    step    ┌──────────┐
-│ Source   │───────────>│ Result.js│
-│ (input)  │            │ (output) │
-└──────────┘            └──────────┘
+┌──────────┐    step    ┌───────────┐
+│ Source   │───────────>│ Result.js │
+│ (input)  │            │ (output)  │
+└──────────┘            └───────────┘
 ```
 
 ## rails - column drift
@@ -43,10 +43,10 @@
 ## rails - multi box border mismatch
 
 ```
-┌───────────────────┐    ┌────────────────────────┐
-│ SecurityMiddleware│───>│ ErrorConvertInterceptor│
-│ (HSTS, Helmet)    │    │ (error normalization)  │
-└───────────────────┘    └────────────────────────┘
+┌────────────────────┐    ┌─────────────────────────┐
+│ SecurityMiddleware │───>│ ErrorConvertInterceptor │
+│ (HSTS, Helmet)     │    │ (error normalization)   │
+└────────────────────┘    └─────────────────────────┘
 ```
 
 ## arrows - v arrow shift
@@ -161,15 +161,15 @@ related sources:
 ┌──────────────────────────────────────────────────────────────┐
 │                      Authentication                          │
 │                                                              │
-│  ┌──────────┐   Bearer token   ┌──────────────┐              │
-│  │Userscript│─────────────────>│ validateAuth │              │
-│  │          │                  │ compare with │              │
-│  └──────────┘                  └──────────────┘              │
+│  ┌───────────┐   Bearer token   ┌──────────────┐             │
+│  │Userscript │─────────────────>│ validateAuth │             │
+│  │           │                  │ compare with │             │
+│  └───────────┘                  └──────────────┘             │
 │                                                              │
-│  ┌──────────┐   OIDC token     ┌──────────────┐              │
-│  │ GitHub   │─────────────────>│ Workload     │              │
-│  │ Actions  │                  │ Identity Fed │              │
-│  └──────────┘                  └──────┬───────┘              │
+│  ┌───────────┐   OIDC token     ┌──────────────┐             │
+│  │ GitHub    │─────────────────>│ Workload     │             │
+│  │ Actions   │                  │ Identity Fed │             │
+│  └───────────┘                  └─────┬────────┘             │
 │                                       v                      │
 │                                ┌──────────────┐              │
 │                                │ deployer SA  │              │
@@ -222,10 +222,10 @@ related sources:
        │
        ┌───────────────┼───────────────┐
        v               v               v
-┌────────────┐   ┌──────────┐   ┌────────────┐
-│ Firestore  │   │ Compute  │   │ Storage    │
-│ store run  │   │ create VM│   │ fetch zip  │
-└────────────┘   └──────────┘   └────────────┘
+┌────────────┐   ┌───────────┐   ┌────────────┐
+│ Firestore  │   │ Compute   │   │ Storage    │
+│ store run  │   │ create VM │   │ fetch zip  │
+└────────────┘   └───────────┘   └────────────┘
 ```
 
 ## general - mixed (tables + box-walls)

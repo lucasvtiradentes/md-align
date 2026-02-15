@@ -7,11 +7,11 @@
 │              callable-ci.yml                 │
 │          (reusable workflow)                 │
 │                                              │
-│  ┌─────────────┐    ┌─────────────────┐      │
-│  │    check    │    │       test      │      │
-│  │  ruff check │    │    pytest -v    │      │
-│  │  ruff format│    │                 │      │
-│  └─────────────┘    └─────────────────┘      │
+│  ┌──────────────┐    ┌─────────────────┐     │
+│  │  check       │    │       test      │     │
+│  │  ruff check  │    │    pytest -v    │     │
+│  │  ruff format │    │                 │     │
+│  └──────────────┘    └─────────────────┘     │
 └──────────────────────────────────────────────┘
          ^                     ^
          │                     │
@@ -45,7 +45,7 @@ Triggers on `pull_request` events. Calls callable-ci.yml.
 ### push-to-main.yml
 
 Triggers on `push` to `main` branch. Two jobs:
-- ci: calls callable-ci.yml
+- ci:     calls callable-ci.yml
 - deploy: runs after ci passes (currently a stub that echoes "deploy")
 
 ## Branch strategy
@@ -64,8 +64,8 @@ feature branch ──── PR ──── prs.yml (CI)
 
 ## Environment
 
-- Runner: ubuntu-latest
-- Python: 3.12
+- Runner:  ubuntu-latest
+- Python:  3.12
 - Install: pip install -e ".[dev]"
 - No secrets or environment variables required
 

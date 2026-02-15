@@ -59,13 +59,13 @@ Most fix modules depend on parser.py and utils.py. No fix module depends on anot
 └────────┬─────────┘
          │ imports all check modules
          v
-┌──────────────┐  ┌──────────────┐  ┌──────────────┐
-│  tables.py   │  │ box_widths.py│  │ box_walls.py │
-└──────────────┘  └──────┬───────┘  └──────┬───────┘
-                         │                 │
-┌──────────────┐  ┌──────┴───────┐  ┌──────┴───────┐
-│  arrows.py   │  │  rails.py    │  │  pipes.py    │
-└──────┬───────┘  └──────┬───────┘  └──────┬───────┘
+┌──────────────┐  ┌───────────────┐  ┌──────────────┐
+│  tables.py   │  │ box_widths.py │  │ box_walls.py │
+└──────────────┘  └──────┬────────┘  └──────┬───────┘
+                         │                  │
+┌──────────────┐  ┌──────┴────────┐  ┌──────┴───────┐
+│  arrows.py   │  │  rails.py     │  │  pipes.py    │
+└──────┬───────┘  └──────┬────────┘  └─────┬────────┘
        │                 │                 │
        └────────┬────────┴────────┬────────┘
                 v                 v
@@ -73,9 +73,9 @@ Most fix modules depend on parser.py and utils.py. No fix module depends on anot
          │ parser.py  │    │  utils.py │
          └────────────┘    └───────────┘
 
-┌──────────────┐
-│ list_descs.py│  (standalone, no shared deps)
-└──────────────┘
+┌───────────────┐
+│ list_descs.py │  (standalone, no shared deps)
+└───────────────┘
 ```
 
 ## Code block detection flow
@@ -88,9 +88,9 @@ The parser identifies code blocks (``` fences) and groups consecutive lines cont
 │                                       │
 │  text...                              │
 │  ``` ◄─── fence start                 │
-│  ┌────┐                               │
-│  │ box│  ◄─── box group detected      │
-│  └────┘                               │
+│  ┌─────┐                              │
+│  │ box │  ◄─── box group detected     │
+│  └─────┘                              │
 │  ``` ◄─── fence end                   │
 │  text...                              │
 └───────────────────────────────────────┘
@@ -112,10 +112,10 @@ The parser identifies code blocks (``` fences) and groups consecutive lines cont
 Each module follows the same pattern:
 
 ```
-┌──────────┐    check(lines)     ┌───────────┐
-│  lines[] │ ──────────────────> │  errors[] │
-│          │                     │  (strings)│
-└──────────┘                     └───────────┘
+┌──────────┐    check(lines)     ┌────────────┐
+│  lines[] │ ──────────────────> │  errors[]  │
+│          │                     │  (strings) │
+└──────────┘                     └────────────┘
 
 ┌──────────┐    fix(lines)       ┌───────────┐
 │  lines[] │ ──────────────────> │  lines[]  │

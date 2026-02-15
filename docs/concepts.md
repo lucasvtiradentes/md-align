@@ -53,7 +53,7 @@ Before:                    After:
 A rail is a vertical alignment track through a box group. Box characters that appear in consecutive lines at the same (or near-same) column form a rail. Drifted characters (off by a few columns) are detected and corrected to match the dominant column.
 
 Two detection phases:
-- By-index: groups lines with the same number of box chars, clusters by position similarity
+- By-index:  groups lines with the same number of box chars, clusters by position similarity
 - By-column: clusters all box chars by column proximity (threshold: 3 columns)
 
 Rail requirements: minimum 2 entries, maximum 1-line gap between entries.

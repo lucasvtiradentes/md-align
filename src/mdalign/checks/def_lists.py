@@ -54,9 +54,12 @@ def check(lines):
     errors = []
     for group in _collect_groups(lines):
         max_w = max(len(key) for _, key, _ in group)
-        for i, key, _ in group:
+        for i, key, value in group:
             if len(key) < max_w:
-                errors.append(f"L{i + 1} def list key: col={len(key)} expected={max_w}")
+                padded = key + " " * (max_w - len(key))
+                fixed_line = padded + " " + value.lstrip(" ")
+                if fixed_line != lines[i].rstrip("\n"):
+                    errors.append(f"L{i + 1} def list key: col={len(key)} expected={max_w}")
     return errors
 
 

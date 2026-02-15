@@ -17,25 +17,25 @@ For each `┌` found in a code block:
 5. Check all interior lines for wall alignment at expected_right and col_left
 
 ```
-┌───────────────────────────────────────────┐
-│  Find corner at col_left                  │
-│         │                                 │
-│         v                                 │
-│  _find_box_closer(open, close) for top    │
-│         │                                 │
-│         v                                 │
-│  Scan down for bottom-left at col_left    │
-│         │                                 │
-│         v                                 │
-│  _find_box_closer(open, close) for bottom │
-│         │                                 │
-│         v                                 │
-│  expected_right = max(open, close)        │
-│         │                                 │
-│         v                                 │
-│  Check corners and interior wall positions│
-│  against expected_right                   │
-└───────────────────────────────────────────┘
+┌────────────────────────────────────────────┐
+│  Find corner at col_left                   │
+│         │                                  │
+│         v                                  │
+│  _find_box_closer(open, close) for top     │
+│         │                                  │
+│         v                                  │
+│  Scan down for bottom-left at col_left     │
+│         │                                  │
+│         v                                  │
+│  _find_box_closer(open, close) for bottom  │
+│         │                                  │
+│         v                                  │
+│  expected_right = max(open, close)         │
+│         │                                  │
+│         v                                  │
+│  Check corners and interior wall positions │
+│  against expected_right                    │
+└────────────────────────────────────────────┘
 ```
 
 ## Tolerances

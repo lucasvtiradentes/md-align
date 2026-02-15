@@ -1,6 +1,6 @@
 ```
-┌───────────────────┐    ┌────────────────────────┐
-│ SecurityMiddleware│───>│ ErrorConvertInterceptor│
-│ (HSTS, Helmet)    │    │ (error normalization)  │
-└───────────────────┘    └────────────────────────┘
+┌────────────────────┐    ┌─────────────────────────┐
+│ SecurityMiddleware │───>│ ErrorConvertInterceptor │
+│ (HSTS, Helmet)     │    │ (error normalization)   │
+└────────────────────┘    └─────────────────────────┘
 ```
