@@ -266,6 +266,15 @@ related sources:
 └──────┘          └──────┘
 ```
 
+## box-spacing - content touching wall
+
+```
+┌────────────┐
+│  errors[]  │
+│  (strings) │
+└────────────┘
+```
+
 ## def-lists - basic
 
 config:
