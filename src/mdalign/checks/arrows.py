@@ -53,7 +53,7 @@ def _find_arrow_target(code_lines, arrow_idx, arrow_col, arrow_char):
     search_range = range(arrow_idx - 1, -1, -1) if arrow_char == "v" else range(arrow_idx + 1, len(code_lines))
     for si in search_range:
         _, sraw = code_lines[si]
-        for dc in [0, -1, 1, -2, 2]:
+        for dc in [0, -1, 1, -2, 2, -3, 3]:
             col = arrow_col + dc
             if 0 <= col < len(sraw) and sraw[col] in BOX_CHARS:
                 return col if dc != 0 else None

@@ -1,6 +1,8 @@
 from mdalign.parser import group_box_lines, iter_code_blocks
 from mdalign.utils import (
     BOX_CHARS,
+    BOX_CLOSERS,
+    BOX_OPENERS,
     CLUSTER_THRESHOLD,
     RAIL_MAX_GAP,
     RAIL_THRESHOLD,
@@ -182,6 +184,26 @@ def _check_rails_by_column(group, already_flagged):
 CONNECTOR_DRIFT = 5
 
 
+def _is_anchored_connector(raw, col, outer_cols):
+    if col >= len(raw) or raw[col] not in ("┬", "┴"):
+        return False
+    found_opener = False
+    for j in range(col - 1, -1, -1):
+        c = raw[j]
+        if c == "─" or c in ("┬", "┴", "┼"):
+            continue
+        found_opener = c in BOX_OPENERS and j not in outer_cols
+        break
+    if not found_opener:
+        return False
+    for j in range(col + 1, len(raw)):
+        c = raw[j]
+        if c == "─" or c in ("┬", "┴", "┼"):
+            continue
+        return c in BOX_CLOSERS and j not in outer_cols
+    return False
+
+
 def _detect_outer_columns(group):
     col_count = {}
     for _, raw in group:
@@ -221,8 +243,12 @@ def _find_connector_drifts(group, already_flagged=None):
             continue
         li_a, chars_a = inner[gi_a]
         li_b, chars_b = inner[gi_b]
+        raw_a = group[gi_a][1]
+        raw_b = group[gi_b][1]
+        anchored_a = {col for col in chars_a if _is_anchored_connector(raw_a, col, outer)}
+        sorted_cols = sorted(anchored_a) + sorted(set(chars_a) - anchored_a)
 
-        for col_a in chars_a:
+        for col_a in sorted_cols:
             if col_a in chars_b:
                 continue
             candidates = [(abs(col_b - col_a), col_b) for col_b in chars_b if 0 < abs(col_b - col_a) <= CONNECTOR_DRIFT]
@@ -231,14 +257,25 @@ def _find_connector_drifts(group, already_flagged=None):
             _, col_b = min(candidates)
             if col_b in chars_a:
                 continue
-            support_a = _local_support(group, col_a, gi_a, gi_b)
-            support_b = _local_support(group, col_b, gi_b, gi_a)
-            if support_a < support_b and (li_a, col_a) not in flagged:
-                drifts.append((li_a, col_a, col_b))
-                flagged.add((li_a, col_a))
-            elif support_b < support_a and (li_b, col_b) not in flagged:
-                drifts.append((li_b, col_b, col_a))
-                flagged.add((li_b, col_b))
+            is_anchor_a = col_a in anchored_a
+            is_anchor_b = _is_anchored_connector(raw_b, col_b, outer)
+            if is_anchor_a and not is_anchor_b:
+                if (li_b, col_b) not in flagged:
+                    drifts.append((li_b, col_b, col_a))
+                    flagged.add((li_b, col_b))
+            elif is_anchor_b and not is_anchor_a:
+                if (li_a, col_a) not in flagged:
+                    drifts.append((li_a, col_a, col_b))
+                    flagged.add((li_a, col_a))
+            else:
+                support_a = _local_support(group, col_a, gi_a, gi_b)
+                support_b = _local_support(group, col_b, gi_b, gi_a)
+                if support_a < support_b and (li_a, col_a) not in flagged:
+                    drifts.append((li_a, col_a, col_b))
+                    flagged.add((li_a, col_a))
+                elif support_b < support_a and (li_b, col_b) not in flagged:
+                    drifts.append((li_b, col_b, col_a))
+                    flagged.add((li_b, col_b))
     return drifts
 
 
