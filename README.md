@@ -132,6 +132,7 @@ mdalign <path>                        # check-only (default) - detect issues, no
 mdalign --check <path>                # explicit check-only (same as default)
 mdalign --fix <path>                  # auto-fix files in place
 mdalign --diff <path>                 # show unified diff of what would change
+mdalign --verbose <path>              # show actionable hints with each error
 mdalign --ignore tables,pipes <path>  # skip specific checks
 mdalign --help                        # show help
 mdalign --version                     # show version

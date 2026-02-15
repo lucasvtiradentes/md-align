@@ -18,6 +18,7 @@ from mdalign.checks import (
     tables,
     wide_chars,
 )
+from mdalign.hints import get_hint
 
 CHECK_MODULES = {
     "tables": tables,
@@ -94,6 +95,7 @@ Usage:
   mdalign --check <path>                # explicit check-only
   mdalign --fix <path>                  # auto-fix files in place
   mdalign --diff <path>                 # show unified diff of changes
+  mdalign --verbose <path>              # show actionable hints with each error
   mdalign --ignore tables,pipes <path>  # skip specific checks
   mdalign --help                        # show this help
   mdalign --version                     # show version
@@ -135,6 +137,13 @@ def _collect_files(path):
     sys.exit(1)
 
 
+def _fmt(error, verbose):
+    if not verbose:
+        return error
+    hint = get_hint(error)
+    return f"{error} \u2192 {hint}" if hint else error
+
+
 def main():
     if "--help" in sys.argv or "-h" in sys.argv:
         print_help()
@@ -146,6 +155,7 @@ def main():
 
     fix_mode = "--fix" in sys.argv
     diff_mode = "--diff" in sys.argv
+    verbose = "--verbose" in sys.argv
 
     ignored = set()
     argv = sys.argv[1:]
@@ -212,12 +222,12 @@ def main():
             if remaining:
                 print(f"\n{rel}: {len(remaining)} unfixable issue(s):")
                 for e in remaining:
-                    print(f"  {e}")
+                    print(f"  {_fmt(e, verbose)}")
                 total_errors += len(remaining)
         else:
             print(f"\n{rel}:")
             for e in errs:
-                print(f"  {e}")
+                print(f"  {_fmt(e, verbose)}")
             total_errors += len(errs)
 
     if diff_mode:
