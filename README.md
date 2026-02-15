@@ -12,7 +12,7 @@ When docs are visually harmonious - with aligned columns, consistent box widths,
 - 3 modes        - check (default), auto-fix in place, or unified diff
 - flexible paths - files, directories, or glob patterns (e.g. `"docs/**/*.md"`)
 - CI-friendly    - exit code 0 when aligned, 1 when issues found
-- 10 alignment checks:
+- 11 alignment checks:
   - [Table columns](tests/fixtures/checks/tables)          - pads cells so every column matches the separator row width
   - [Box widths](tests/fixtures/checks/box-widths)          - ensures all lines in a box group have the same total length
   - [Box padding](tests/fixtures/checks/box-padding)        - normalizes left-padding of content lines inside boxes
@@ -20,8 +20,9 @@ When docs are visually harmonious - with aligned columns, consistent box widths,
   - [Rail alignment](tests/fixtures/checks/rails)           - aligns vertically adjacent box chars to the same column
   - [Arrow alignment](tests/fixtures/checks/arrows)         - aligns standalone `v`/`^` arrows with the nearest box char above/below
   - [Pipe continuity](tests/fixtures/checks/pipes)          - traces from T-junctions to detect drifted connector pipes
-  - [Box walls](tests/fixtures/checks/box-walls)            - verifies nested box right walls match their opening/closing borders
-  - [List descriptions](tests/fixtures/checks/list-descs)   - aligns the separator dash in list item descriptions
+  - [Box spacing](tests/fixtures/checks/box-spacing)         - ensures minimum right-side spacing between content and box wall
+  - [Box walls](tests/fixtures/checks/box-walls)             - verifies nested box right walls match their opening/closing borders
+  - [List descriptions](tests/fixtures/checks/list-descs)    - aligns the separator dash in list item descriptions
   - [Definition lists](tests/fixtures/checks/def-lists)     - aligns the `:` separator in `key: value` list items
 
 ## Example
@@ -103,6 +104,15 @@ When docs are visually harmonious - with aligned columns, consistent box widths,
 ┌─────────┴───┐              ┌─────────┴───┐
 │   output    │              │   output    │
 └─────────────┘              └─────────────┘
+```
+
+### [Box spacing](tests/fixtures/checks/box-spacing)
+
+```
+┌───────────┐       ┌────────────┐
+│  errors[] │       │  errors[]  │
+│  (strings)│  -->  │  (strings) │
+└───────────┘       └────────────┘
 ```
 
 ### [Box walls](tests/fixtures/checks/box-walls)
