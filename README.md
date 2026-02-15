@@ -126,13 +126,23 @@ When docs are visually harmonious - with aligned columns, consistent box widths,
 
 </details>
 
-## Usage
+## Commands
 
 ```bash
-mdalign <path>         # check-only (default) - detect issues, no writes
-mdalign --fix <path>   # auto-fix files in place
-mdalign --diff <path>  # show unified diff of what would change
+mdalign <path>                        # check-only (default) - detect issues, no writes
+mdalign --check <path>                # explicit check-only (same as default)
+mdalign --fix <path>                  # auto-fix files in place
+mdalign --diff <path>                 # show unified diff of what would change
+mdalign --ignore tables,pipes <path>  # skip specific checks
+mdalign --help                        # show help
+mdalign --version                     # show version
 ```
+
+Paths can be files, directories, or glob patterns (e.g. `"docs/**/*.md"`).
+
+Check names for `--ignore`: tables, box-widths, box-padding, box-spacing, horiz-arrows, box-walls, rails, arrows, pipes, list-descs, def-lists.
+
+Exit codes: 0 = all aligned, 1 = issues found.
 
 ### Install
 
