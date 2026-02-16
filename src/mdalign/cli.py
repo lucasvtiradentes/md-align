@@ -18,11 +18,8 @@ from mdalign.checks import (
     tables,
     wide_chars,
 )
+from mdalign.constants import BOX_CHARS_WITH_DASH, FIX_ITERATIONS, MIN_BOX_CHARS_FOR_STRIP
 from mdalign.hints import get_hint
-
-BOX_CHARS_SET = set("│┌└├┐┘┤┬┴┼─")
-FIX_ITERATIONS = 3
-MIN_BOX_CHARS_FOR_STRIP = 2
 
 CHECK_MODULES = {
     "tables": tables,
@@ -88,7 +85,7 @@ def _strip_box_trailing_whitespace(lines):
             result.append(line)
             continue
         if in_code:
-            box_count = sum(1 for c in raw if c in BOX_CHARS_SET)
+            box_count = sum(1 for c in raw if c in BOX_CHARS_WITH_DASH)
             if box_count >= MIN_BOX_CHARS_FOR_STRIP:
                 stripped = raw.rstrip()
                 if stripped != raw:

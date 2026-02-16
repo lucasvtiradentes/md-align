@@ -1,11 +1,12 @@
+from mdalign.constants import (
+    BORDER_CHARS,
+    BOX_CHARS,
+    LARGE_SPACE_GAP,
+    MAX_FIX_ITERATIONS,
+    MIN_PAD,
+)
 from mdalign.parser import iter_code_blocks
-from mdalign.utils import BOX_CHARS, _find_boxes, _is_tree_block
-
-MIN_PAD = 1
-BORDER_CHARS = {"─", "┌", "└", "┐", "┘", "┬", "┴", "├", "┤", "┼"}
-PIPE_CHARS = {"│", "┼", "┬", "┴", "├", "┤"}
-SIBLING_SPACE_GAP = "    "
-MAX_FIX_ITERATIONS = 10
+from mdalign.utils import _find_boxes, _is_tree_block
 
 
 def check(lines):
@@ -84,12 +85,12 @@ def _collect_box_insertions(code_lines):
         return None
 
     def has_sibling_after(col_right, opener_raw):
-        after = opener_raw[col_right + 1:]
+        after = opener_raw[col_right + 1 :]
         if "┌" not in after:
             return False
         corner_pos = after.index("┌")
         between = after[:corner_pos]
-        return SIBLING_SPACE_GAP in between
+        return LARGE_SPACE_GAP in between
 
     box_insertions = []
     for col_left, col_right, opening_ci, closing_ci, content_indices in all_boxes:

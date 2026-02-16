@@ -1,8 +1,6 @@
+from mdalign.constants import ARROW_CHARS, ARROW_SEARCH_RANGE, BOX_CHARS, HORIZ_ARROW_CHARS
 from mdalign.parser import iter_code_blocks
-from mdalign.utils import ARROW_CHARS, BOX_CHARS, _is_standalone_arrow
-
-HORIZ_ARROW_CHARS = {">", "<"}
-ARROW_SEARCH_RANGE = 3
+from mdalign.utils import _is_standalone_arrow
 
 
 def check(lines):

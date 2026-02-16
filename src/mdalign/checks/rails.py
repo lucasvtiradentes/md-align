@@ -1,23 +1,21 @@
-from mdalign.parser import group_box_lines, iter_code_blocks
-from mdalign.utils import (
+from mdalign.constants import (
     BOX_CHARS,
     BOX_CLOSERS,
     BOX_OPENERS,
     CLUSTER_THRESHOLD,
+    CONNECTOR_DRIFT,
+    LARGE_SPACE_GAP,
+    LOCAL_SUPPORT_WINDOW,
+    MIN_CLUSTER_SIZE,
+    MIN_PIPES_FOR_ADJACENT,
+    MIN_SEGMENT_SIZE,
+    MINORITY_RATIO,
+    OUTER_COL_THRESHOLD,
     RAIL_MAX_GAP,
     RAIL_THRESHOLD,
-    _is_tree_block,
-    _realign_box_chars,
 )
-
-CONNECTOR_DRIFT = 5
-MIN_CLUSTER_SIZE = 2
-MIN_SEGMENT_SIZE = 2
-MINORITY_RATIO = 3
-OUTER_COL_THRESHOLD = 0.8
-LOCAL_SUPPORT_WINDOW = 2
-MIN_PIPES_FOR_ADJACENT = 2
-LARGE_SPACE_GAP = "    "
+from mdalign.parser import group_box_lines, iter_code_blocks
+from mdalign.utils import _is_tree_block, _realign_box_chars
 
 
 def check(lines):

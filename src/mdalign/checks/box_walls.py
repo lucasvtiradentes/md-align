@@ -1,9 +1,12 @@
-from mdalign.parser import iter_code_blocks
-from mdalign.utils import (
+from mdalign.constants import (
     BOX_CHARS,
     BOX_WALL_DRIFT,
-    MIN_BOX_CONTENT_LINES,
+    LARGE_SPACE_GAP,
     MIN_BOX_WIDTH,
+    MIN_PIPES_FOR_ADJACENT,
+)
+from mdalign.parser import iter_code_blocks
+from mdalign.utils import (
     _find_box_closer,
     _find_nearby_closer_start,
     _find_nearby_pipe,
@@ -11,10 +14,6 @@ from mdalign.utils import (
     _is_tree_block,
     _shift_pipe,
 )
-
-MIN_PIPES_FOR_ADJACENT = 2
-LARGE_SPACE_GAP = "    "
-MIN_BOX_LINES = 3
 
 
 def check(lines):

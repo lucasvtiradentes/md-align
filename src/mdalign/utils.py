@@ -1,16 +1,8 @@
-BOX_CHARS = set("│┌└├┐┘┤┬┴┼")
-BOX_CLOSERS = {"┐", "┘", "┤"}
-BOX_OPENERS = {"┌", "└", "├"}
-ARROW_CHARS = {"v", "^"}
-
-RAIL_THRESHOLD = 1
-RAIL_MAX_GAP = 1
-CLUSTER_THRESHOLD = 3
-BOX_WALL_DRIFT = 8
-PIPE_DRIFT_MAX = 5
-BOX_WALL_CLOSER_DRIFT = 2
-MIN_BOX_WIDTH = 4
-MIN_BOX_CONTENT_LINES = 2
+from mdalign.constants import (
+    BOX_WALL_CLOSER_DRIFT,
+    MIN_BOX_CONTENT_LINES,
+    MIN_BOX_WIDTH,
+)
 
 
 def _is_tree_block(code_lines):

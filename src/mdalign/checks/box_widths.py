@@ -1,5 +1,6 @@
+from mdalign.constants import BOX_CHARS, BOX_CLOSERS, BOX_OPENERS
 from mdalign.parser import group_box_lines, iter_code_blocks
-from mdalign.utils import BOX_CHARS, BOX_CLOSERS, BOX_OPENERS, _is_tree_block
+from mdalign.utils import _is_tree_block
 
 
 def check(lines):

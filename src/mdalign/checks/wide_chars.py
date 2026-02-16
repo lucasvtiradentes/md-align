@@ -1,8 +1,7 @@
 import unicodedata
 
+from mdalign.constants import SAFE_BOX_AND_ARROW
 from mdalign.parser import iter_code_blocks
-
-SAFE_BOX_AND_ARROW = set("─│┌┐└┘├┤┬┴┼→←↑↓")
 
 
 def check(lines):

@@ -1,12 +1,10 @@
 import re
 
+from mdalign.constants import MAX_KEY_WORDS, MIN_GROUP_SIZE
 from mdalign.parser import in_code_block
-
-MIN_GROUP_SIZE = 2
 
 _PREFIX = re.compile(r"^(\s*- )")
 _URL_COLON = re.compile(r"https?:|ftp:|file:")
-_MAX_KEY_WORDS = 4
 
 
 def _find_colon_sep(text):
@@ -28,7 +26,7 @@ def _parse_line(raw):
     if colon_idx < 0:
         return None
     key_text = after_prefix[:colon_idx]
-    if len(key_text.split()) > _MAX_KEY_WORDS:
+    if len(key_text.split()) > MAX_KEY_WORDS:
         return None
     key_part = raw[: m.end() + colon_idx + 1]
     if _URL_COLON.search(key_part):

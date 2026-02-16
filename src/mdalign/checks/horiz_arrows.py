@@ -1,11 +1,11 @@
 import re
 
+from mdalign.constants import BOX_CORNERS
 from mdalign.parser import iter_code_blocks
 from mdalign.utils import _is_tree_block
 
 _RIGHT_ARROW = re.compile(r"─+(>)")
 _LEFT_ARROW = re.compile(r"(<)─+")
-_WALL_CORNERS = set("┌┐└┘")
 
 
 def check(lines):
@@ -24,7 +24,7 @@ def fix(lines):
 
 def _is_box_wall_col(code_lines, col):
     for _, raw in code_lines:
-        if col < len(raw) and raw[col] in _WALL_CORNERS:
+        if col < len(raw) and raw[col] in BOX_CORNERS:
             return True
     return False
 

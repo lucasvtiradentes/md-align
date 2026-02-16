@@ -1,7 +1,8 @@
 from collections import Counter
 
+from mdalign.constants import BOX_CHARS, MAX_PAD_DRIFT
 from mdalign.parser import iter_code_blocks
-from mdalign.utils import BOX_CHARS, _find_boxes, _is_tree_block
+from mdalign.utils import _find_boxes, _is_tree_block
 
 
 def check(lines):
@@ -35,9 +36,6 @@ def _get_left_padding(raw, col_left, col_right):
         else:
             break
     return pad
-
-
-MAX_PAD_DRIFT = 3
 
 
 def _expected_padding(paddings):

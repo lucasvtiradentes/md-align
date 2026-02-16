@@ -1,4 +1,4 @@
-from mdalign.utils import BOX_CHARS
+from mdalign.constants import BOX_CHARS
 
 
 def iter_code_blocks(lines):
