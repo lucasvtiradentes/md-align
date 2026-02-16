@@ -1,6 +1,8 @@
 from mdalign.parser import iter_code_blocks
 from mdalign.utils import ARROW_CHARS, BOX_CHARS, _is_standalone_arrow
 
+HORIZ_ARROW_CHARS = {">", "<"}
+
 
 def check(lines):
     errors = []
@@ -14,9 +16,6 @@ def fix(lines):
     for code_indices, _ in iter_code_blocks(lines):
         _fix_arrows_in_block(code_indices, result)
     return result
-
-
-HORIZ_ARROW_CHARS = {">", "<"}
 
 
 def _check_arrows(code_lines):

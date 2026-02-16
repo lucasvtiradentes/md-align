@@ -20,6 +20,8 @@ from mdalign.checks import (
 )
 from mdalign.hints import get_hint
 
+BOX_CHARS_SET = set("│┌└├┐┘┤┬┴┼─")
+
 CHECK_MODULES = {
     "tables": tables,
     "box-widths": box_widths,
@@ -72,9 +74,6 @@ def run_fixes(lines, ignored=None):
     fixed = _apply("wide-chars", wide_chars.fix, fixed)
     fixed = _strip_box_trailing_whitespace(fixed)
     return fixed
-
-
-BOX_CHARS_SET = set("│┌└├┐┘┤┬┴┼─")
 
 
 def _strip_box_trailing_whitespace(lines):

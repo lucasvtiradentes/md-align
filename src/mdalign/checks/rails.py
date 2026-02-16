@@ -10,6 +10,8 @@ from mdalign.utils import (
     _realign_box_chars,
 )
 
+CONNECTOR_DRIFT = 5
+
 
 def check(lines):
     errors = []
@@ -212,9 +214,6 @@ def _check_rails_by_column(group, already_flagged):
     for rail in _identify_rails(group):
         errors.extend(_rail_errors(rail, group, already_flagged))
     return errors
-
-
-CONNECTOR_DRIFT = 5
 
 
 def _is_anchored_connector(raw, col, outer_cols):

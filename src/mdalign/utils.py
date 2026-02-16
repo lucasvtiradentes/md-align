@@ -8,6 +8,7 @@ RAIL_MAX_GAP = 1
 CLUSTER_THRESHOLD = 3
 BOX_WALL_DRIFT = 8
 PIPE_DRIFT_MAX = 5
+BOX_WALL_CLOSER_DRIFT = 2
 
 
 def _is_tree_block(code_lines):
@@ -187,9 +188,6 @@ def _find_boxes(code_lines):
                 boxes.append((col_left, col_right, idx, closing_idx, content_indices))
             j = col_right + 1
     return boxes
-
-
-BOX_WALL_CLOSER_DRIFT = 2
 
 
 def _find_nearby_closer_start(raw, col_left, col_right_open, max_drift=BOX_WALL_CLOSER_DRIFT):

@@ -2,6 +2,8 @@ from mdalign.parser import iter_code_blocks
 from mdalign.utils import BOX_CHARS, _find_boxes, _is_tree_block
 
 MIN_PAD = 1
+BORDER_CHARS = {"─", "┌", "└", "┐", "┘", "┬", "┴", "├", "┤", "┼"}
+PIPE_CHARS = {"│", "┼", "┬", "┴", "├", "┤"}
 
 
 def check(lines):
@@ -60,9 +62,6 @@ def _check_spacing(code_lines):
                 errors.append(f"L{line_idx + 1} box left spacing={lpad}, minimum={MIN_PAD}")
 
     return errors
-
-
-BORDER_CHARS = {"─", "┌", "└", "┐", "┘", "┬", "┴", "├", "┤", "┼"}
 
 
 def _find_connectors_in_range(raw, col_left, col_right):
@@ -129,9 +128,6 @@ def _collect_box_insertions(code_lines):
             box_insertions.append((col_left + 1, deficit, "left", line_indices, connectors))
 
     return box_insertions
-
-
-PIPE_CHARS = {"│", "┼", "┬", "┴", "├", "┤"}
 
 
 def _trace_connected_pipes(code_indices, all_lines, box_lines, connector_col):
