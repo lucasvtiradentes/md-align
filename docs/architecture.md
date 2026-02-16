@@ -74,12 +74,12 @@ Most fix modules depend on parser.py and utils.py. No fix module depends on anot
 │  arrows.py   │  │  rails.py      │  │  pipes.py    │
 └──────┬───────┘  └──────┬─────────┘  └─────┬────────┘
        │                 │                  │
-┌──────┴────────┐  ┌─────┴──────────┐       │
-│box_padding.py │  │box_spacing.py  │       │
-└──────┬────────┘  └─────┬──────────┘       │
+┌──────┴─────────┐  ┌────┴───────────┐      │
+│ box_padding.py │  │ box_spacing.py │      │
+└──────┬─────────┘  └────┬───────────┘      │
        │                 │                  │
 ┌──────┴───────┐         │                  │
-│horiz_arrows  │         │                  │
+│ horiz_arrows │         │                  │
 └──────┬───────┘         │                  │
        │                 │                  │
        └────────┬────────┴────────┬─────────┘

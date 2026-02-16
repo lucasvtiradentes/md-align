@@ -44,10 +44,10 @@ Before the first release, configure PyPI trusted publishing:
 
 1. Go to https://pypi.org/manage/account/publishing/
 2. Add a new pending publisher:
-   - Package name: `mdalign`
-   - Owner:      `lucasvtiradentes`
-   - Repository: `md-align`
-   - Workflow name: `release.yml`
+   - Package name:     `mdalign`
+   - Owner:            `lucasvtiradentes`
+   - Repository:       `md-align`
+   - Workflow name:    `release.yml`
    - Environment name: `pypi`
 3. On the GitHub repo, go to Settings > Environments
 4. Create an environment named `pypi`

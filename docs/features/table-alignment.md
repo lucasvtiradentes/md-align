@@ -37,7 +37,7 @@ Format: `L{line} table col{n}: width={actual} expected={sep_width} (separator at
 3. Calculate max width per column across all rows (using content width, ignoring trailing spaces)
 4. Rewrite each row:
    - Separator cells: fill with dashes to target width
-   - Data cells: right-pad content with spaces to target width
+   - Data cells:      right-pad content with spaces to target width
 
 ```
 Input:                   Fixed:

@@ -129,7 +129,7 @@ def _identify_rails(group):
     return rails
 
 
-def _resolve_rail(rail):
+def _resolve_rail(rail, group=None):
     col_data = {}
     for line_idx, col, char in rail:
         col_data.setdefault(col, []).append((line_idx, char))
@@ -137,12 +137,35 @@ def _resolve_rail(rail):
     if len(col_data) <= 1:
         return None, col_data
 
+    outer_cols = _detect_outer_columns(group) if group else set()
+    gi_map = {li: gi for gi, (li, _) in enumerate(group)} if group else {}
+
+    anchored = {}
+    for col, entries in col_data.items():
+        count = 0
+        for li, c in entries:
+            if c in ("┬", "┴") and group:
+                gi = gi_map.get(li)
+                if gi is not None:
+                    _, raw = group[gi]
+                    if _is_anchored_connector(raw, col, outer_cols):
+                        count += 1
+        anchored[col] = count
+
+    latest_anchored = {col: max((li for li, c in entries if c in ("┬", "┴")), default=-1) for col, entries in col_data.items()}
+
     pipe_origins = {col: sum(1 for _, c in entries if c in ("┬", "┴")) for col, entries in col_data.items()}
     structural = {col: sum(1 for _, c in entries if c not in ("│", "┼")) for col, entries in col_data.items()}
     earliest = {col: min(li for li, _ in entries) for col, entries in col_data.items()}
     has_pipe = any(v > 0 for v in pipe_origins.values())
     has_structural = any(v > 0 for v in structural.values())
-    if has_pipe:
+    has_anchored = any(v > 0 for v in anchored.values())
+
+    if has_anchored:
+        most_common = max(
+            col_data.keys(), key=lambda k: (anchored[k], latest_anchored[k], pipe_origins[k], structural[k], len(col_data[k]), -earliest[k])
+        )
+    elif has_pipe:
         most_common = max(
             col_data.keys(), key=lambda k: (pipe_origins[k], structural[k], len(col_data[k]), -earliest[k])
         )
@@ -157,11 +180,11 @@ def _resolve_rail(rail):
     return most_common, col_data
 
 
-def _rail_errors(rail, already_flagged=None):
+def _rail_errors(rail, group=None, already_flagged=None):
     errors = []
     if not rail:
         return errors
-    most_common, col_data = _resolve_rail(rail)
+    most_common, col_data = _resolve_rail(rail, group)
     if most_common is None:
         return errors
 
@@ -177,7 +200,7 @@ def _rail_errors(rail, already_flagged=None):
 def _check_rails_by_column(group, already_flagged):
     errors = []
     for rail in _identify_rails(group):
-        errors.extend(_rail_errors(rail, already_flagged))
+        errors.extend(_rail_errors(rail, group, already_flagged))
     return errors
 
 
@@ -294,10 +317,10 @@ def _check_rails(code_lines):
     return errors
 
 
-def _build_corrections(rails):
+def _build_corrections(rails, group=None):
     corrections = {}
     for rail in rails:
-        most_common, col_data = _resolve_rail(rail)
+        most_common, col_data = _resolve_rail(rail, group)
         if most_common is None:
             continue
         for col, entries in col_data.items():
@@ -377,7 +400,7 @@ def _fix_rails_by_index(group, all_lines):
 
 
 def _fix_rails_by_column(group, all_lines):
-    corrections = _build_corrections(_identify_rails(group))
+    corrections = _build_corrections(_identify_rails(group), group)
     _apply_corrections(group, all_lines, corrections)
 
 

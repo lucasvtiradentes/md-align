@@ -86,6 +86,8 @@ def _fix_arrows_in_block(code_indices, all_lines):
                         break
                 if spaces_after >= delta:
                     new_raw = new_raw[:j] + " " * delta + new_raw[j] + new_raw[j + 1 + delta :]
+                elif j + 1 + spaces_after >= len(new_raw):
+                    new_raw = new_raw[:j] + " " * delta + new_raw[j]
             elif delta < 0:
                 remove = abs(delta)
                 spaces_before = 0

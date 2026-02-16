@@ -23,6 +23,10 @@ from mdalign.hints import get_hint
             "add 1 space(s) before box wall",
         ),
         (
+            "L9 box left spacing=0, minimum=1",
+            "add 1 space(s) after box wall",
+        ),
+        (
             "L6 arrow '>' at col 15, gap=3 to box wall",
             "extend arrow dashes 3 char(s) to reach wall",
         ),

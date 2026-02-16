@@ -55,7 +55,7 @@ def _shift_pipe(raw, current_col, expected_col, strip_trailing=False):
                 break
         if spaces_after >= delta:
             return raw[:current_col] + " " * delta + "│" + raw[current_col + 1 + delta :]
-        elif not strip_trailing and current_col >= len(raw) - 1:
+        elif current_col + 1 + spaces_after >= len(raw):
             return raw[:current_col] + " " * delta + "│"
     else:
         remove = abs(delta)

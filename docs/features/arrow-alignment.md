@@ -43,7 +43,7 @@ Format: `L{line} arrow '{char}' at col {actual}, expected col {target}`
 1. For each line, collect all arrow corrections
 2. Apply corrections right-to-left:
    - Shift right: insert spaces before arrow, remove spaces after
-   - Shift left: remove spaces before arrow, insert spaces after
+   - Shift left:  remove spaces before arrow, insert spaces after
 3. Only shift if sufficient spaces exist (no overwriting content)
 
 ## Standalone check

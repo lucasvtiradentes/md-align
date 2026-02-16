@@ -18,6 +18,10 @@ _PATTERNS = [
         lambda m: f"add {int(m.group(2)) - int(m.group(1))} space(s) before box wall",
     ),
     (
+        re.compile(r"box left spacing=(\d+), minimum=(\d+)"),
+        lambda m: f"add {int(m.group(2)) - int(m.group(1))} space(s) after box wall",
+    ),
+    (
         re.compile(r"arrow '>' at col \d+, gap=(\d+) to box wall"),
         lambda m: f"extend arrow dashes {m.group(1)} char(s) to reach wall",
     ),
