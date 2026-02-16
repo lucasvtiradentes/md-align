@@ -9,6 +9,8 @@ CLUSTER_THRESHOLD = 3
 BOX_WALL_DRIFT = 8
 PIPE_DRIFT_MAX = 5
 BOX_WALL_CLOSER_DRIFT = 2
+MIN_BOX_WIDTH = 4
+MIN_BOX_CONTENT_LINES = 2
 
 
 def _is_tree_block(code_lines):
@@ -172,7 +174,7 @@ def _find_boxes(code_lines):
                 continue
             col_left = j
             col_right = _find_box_closer(raw, "┌", "┐", j)
-            if col_right is None or col_right - col_left < 4:
+            if col_right is None or col_right - col_left < MIN_BOX_WIDTH:
                 j += 1
                 continue
             closing_idx = None
@@ -183,7 +185,7 @@ def _find_boxes(code_lines):
                     if cr is not None:
                         closing_idx = si
                         break
-            if closing_idx is not None and closing_idx - idx >= 2:
+            if closing_idx is not None and closing_idx - idx >= MIN_BOX_CONTENT_LINES:
                 content_indices = list(range(idx + 1, closing_idx))
                 boxes.append((col_left, col_right, idx, closing_idx, content_indices))
             j = col_right + 1

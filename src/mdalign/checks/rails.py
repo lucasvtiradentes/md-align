@@ -11,6 +11,13 @@ from mdalign.utils import (
 )
 
 CONNECTOR_DRIFT = 5
+MIN_CLUSTER_SIZE = 2
+MIN_SEGMENT_SIZE = 2
+MINORITY_RATIO = 3
+OUTER_COL_THRESHOLD = 0.8
+LOCAL_SUPPORT_WINDOW = 2
+MIN_PIPES_FOR_ADJACENT = 2
+LARGE_SPACE_GAP = "    "
 
 
 def check(lines):
@@ -40,7 +47,7 @@ def _cluster_by_positions(items, threshold=CLUSTER_THRESHOLD):
                 break
         if not fitted:
             clusters.append([item])
-    return [c for c in clusters if len(c) >= 2]
+    return [c for c in clusters if len(c) >= MIN_CLUSTER_SIZE]
 
 
 def _has_adjacent_support(group, line_idx, col):
@@ -66,7 +73,7 @@ def _check_rails_by_index(group):
         by_count.setdefault(len(positions), []).append((i, raw, positions))
 
     for count, items in by_count.items():
-        if count < 2:
+        if count < MIN_CLUSTER_SIZE:
             continue
         for cluster in _cluster_by_positions(items):
             for pos_idx in range(count):
@@ -104,10 +111,10 @@ def _identify_rails(group):
         if entry[1] - current[0][1] <= RAIL_THRESHOLD:
             current.append(entry)
         else:
-            if len(current) >= 2:
+            if len(current) >= MIN_SEGMENT_SIZE:
                 col_clusters.append(current)
             current = [entry]
-    if len(current) >= 2:
+    if len(current) >= MIN_SEGMENT_SIZE:
         col_clusters.append(current)
 
     rails = []
@@ -119,10 +126,10 @@ def _identify_rails(group):
             if entry[0] - current_seg[-1][0] <= RAIL_MAX_GAP:
                 current_seg.append(entry)
             else:
-                if len(current_seg) >= 2:
+                if len(current_seg) >= MIN_SEGMENT_SIZE:
                     segments.append(current_seg)
                 current_seg = [entry]
-        if len(current_seg) >= 2:
+        if len(current_seg) >= MIN_SEGMENT_SIZE:
             segments.append(current_seg)
 
         for seg in segments:
@@ -186,7 +193,7 @@ def _resolve_rail(rail, group=None):
     else:
         most_common = max(col_data.keys(), key=lambda k: len(col_data[k]))
     minority = len(rail) - len(col_data[most_common])
-    if not has_structural and not has_pipe and minority * 3 > len(rail):
+    if not has_structural and not has_pipe and minority * MINORITY_RATIO > len(rail):
         return None, col_data
 
     return most_common, col_data
@@ -242,11 +249,11 @@ def _detect_outer_columns(group):
         for j, c in enumerate(raw):
             if c in BOX_CHARS:
                 col_count[j] = col_count.get(j, 0) + 1
-    threshold = len(group) * 0.8
+    threshold = len(group) * OUTER_COL_THRESHOLD
     return {col for col, count in col_count.items() if count >= threshold}
 
 
-def _local_support(group, col, gi, exclude_gi, window=2):
+def _local_support(group, col, gi, exclude_gi, window=LOCAL_SUPPORT_WINDOW):
     count = 0
     for dgi in range(-window, window + 1):
         check_gi = gi + dgi
@@ -347,13 +354,12 @@ def _has_independent_adjacent_box(raw, col):
     if not has_box_structure:
         return False
     pipe_indices = [i for i, c in enumerate(after) if c == "│"]
-    if len(pipe_indices) < 2:
+    if len(pipe_indices) < MIN_PIPES_FOR_ADJACENT:
         return False
     first_pipe = pipe_indices[0]
     second_pipe = pipe_indices[1]
     between_pipes = after[first_pipe + 1 : second_pipe]
-    has_large_space_gap = "    " in between_pipes
-    return has_large_space_gap
+    return LARGE_SPACE_GAP in between_pipes
 
 
 def _apply_corrections(group, all_lines, corrections):
@@ -409,7 +415,7 @@ def _fix_rails_by_index(group, all_lines):
 
     corrections = {}
     for count, items in by_count.items():
-        if count < 2:
+        if count < MIN_CLUSTER_SIZE:
             continue
         for cluster in _cluster_by_positions(items):
             for pos_idx in range(count):

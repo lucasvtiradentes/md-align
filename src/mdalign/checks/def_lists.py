@@ -2,6 +2,8 @@ import re
 
 from mdalign.parser import in_code_block
 
+MIN_GROUP_SIZE = 2
+
 _PREFIX = re.compile(r"^(\s*- )")
 _URL_COLON = re.compile(r"https?:|ftp:|file:")
 _MAX_KEY_WORDS = 4
@@ -59,7 +61,7 @@ def _collect_groups(lines):
     current = []
     for i, line in enumerate(lines):
         if i in code_lines:
-            if len(current) >= 2:
+            if len(current) >= MIN_GROUP_SIZE:
                 groups.append(current)
             current = []
             continue
@@ -68,10 +70,10 @@ def _collect_groups(lines):
         if parsed:
             current.append((i, parsed[0], parsed[1]))
         else:
-            if len(current) >= 2:
+            if len(current) >= MIN_GROUP_SIZE:
                 groups.append(current)
             current = []
-    if len(current) >= 2:
+    if len(current) >= MIN_GROUP_SIZE:
         groups.append(current)
     return [g for g in groups if not _is_embedded(g, lines, code_lines)]
 

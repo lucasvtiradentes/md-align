@@ -21,6 +21,8 @@ from mdalign.checks import (
 from mdalign.hints import get_hint
 
 BOX_CHARS_SET = set("│┌└├┐┘┤┬┴┼─")
+FIX_ITERATIONS = 3
+MIN_BOX_CHARS_FOR_STRIP = 2
 
 CHECK_MODULES = {
     "tables": tables,
@@ -59,7 +61,7 @@ def run_fixes(lines, ignored=None):
     fixed = _apply("box-widths", box_widths.fix, fixed)
     fixed = _apply("box-padding", box_padding.fix, fixed)
     fixed = _apply("horiz-arrows", horiz_arrows.fix, fixed)
-    for _ in range(3):
+    for _ in range(FIX_ITERATIONS):
         prev = list(fixed)
         fixed = _apply("box-spacing", box_spacing.fix, fixed)
         fixed = _apply("box-widths", box_widths.fix, fixed)
@@ -87,7 +89,7 @@ def _strip_box_trailing_whitespace(lines):
             continue
         if in_code:
             box_count = sum(1 for c in raw if c in BOX_CHARS_SET)
-            if box_count >= 2:
+            if box_count >= MIN_BOX_CHARS_FOR_STRIP:
                 stripped = raw.rstrip()
                 if stripped != raw:
                     result.append(stripped + "\n" if line.endswith("\n") else stripped)

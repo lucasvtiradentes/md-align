@@ -2,6 +2,8 @@ from mdalign.parser import iter_code_blocks
 from mdalign.utils import (
     BOX_CHARS,
     BOX_WALL_DRIFT,
+    MIN_BOX_CONTENT_LINES,
+    MIN_BOX_WIDTH,
     _find_box_closer,
     _find_nearby_closer_start,
     _find_nearby_pipe,
@@ -9,6 +11,10 @@ from mdalign.utils import (
     _is_tree_block,
     _shift_pipe,
 )
+
+MIN_PIPES_FOR_ADJACENT = 2
+LARGE_SPACE_GAP = "    "
+MIN_BOX_LINES = 3
 
 
 def check(lines):
@@ -33,13 +39,12 @@ def _has_independent_box_after(raw, col):
     if not has_box_structure:
         return False
     pipe_indices = [i for i, c in enumerate(after) if c == "│"]
-    if len(pipe_indices) < 2:
+    if len(pipe_indices) < MIN_PIPES_FOR_ADJACENT:
         return False
     first_pipe = pipe_indices[0]
     second_pipe = pipe_indices[1]
     between_pipes = after[first_pipe + 1 : second_pipe]
-    has_large_space_gap = "    " in between_pipes
-    return has_large_space_gap
+    return LARGE_SPACE_GAP in between_pipes
 
 
 def _check_box_walls(code_lines):
@@ -56,7 +61,7 @@ def _check_box_walls(code_lines):
 
             col_left = j
             col_right_open = _find_box_closer(raw, "┌", "┐", j)
-            if col_right_open is None or col_right_open - col_left < 4:
+            if col_right_open is None or col_right_open - col_left < MIN_BOX_WIDTH:
                 j += 1
                 continue
 
@@ -142,7 +147,7 @@ def _fix_box_walls_in_block(code_indices, all_lines):
 
             col_left = j
             col_right_open = _find_box_closer(raw, "┌", "┐", j)
-            if col_right_open is None or col_right_open - col_left < 4:
+            if col_right_open is None or col_right_open - col_left < MIN_BOX_WIDTH:
                 j += 1
                 continue
 

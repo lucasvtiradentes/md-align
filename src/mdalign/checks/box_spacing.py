@@ -4,6 +4,8 @@ from mdalign.utils import BOX_CHARS, _find_boxes, _is_tree_block
 MIN_PAD = 1
 BORDER_CHARS = {"─", "┌", "└", "┐", "┘", "┬", "┴", "├", "┤", "┼"}
 PIPE_CHARS = {"│", "┼", "┬", "┴", "├", "┤"}
+SIBLING_SPACE_GAP = "    "
+MAX_FIX_ITERATIONS = 10
 
 
 def check(lines):
@@ -87,7 +89,7 @@ def _collect_box_insertions(code_lines):
             return False
         corner_pos = after.index("┌")
         between = after[:corner_pos]
-        return "    " in between
+        return SIBLING_SPACE_GAP in between
 
     box_insertions = []
     for col_left, col_right, opening_ci, closing_ci, content_indices in all_boxes:
@@ -203,7 +205,7 @@ def _fix_spacing_in_block(code_indices, all_lines):
     if _is_tree_block([(i, all_lines[i].rstrip("\n")) for i in code_indices]):
         return
 
-    for _ in range(10):
+    for _ in range(MAX_FIX_ITERATIONS):
         code_lines = [(i, all_lines[i].rstrip("\n")) for i in code_indices]
         box_insertions = _collect_box_insertions(code_lines)
         if not _apply_box_insertions(all_lines, box_insertions, code_indices):
