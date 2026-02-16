@@ -70,7 +70,31 @@ def run_fixes(lines, ignored=None):
     fixed = _apply("list-descs", list_descs.fix, fixed)
     fixed = _apply("def-lists", def_lists.fix, fixed)
     fixed = _apply("wide-chars", wide_chars.fix, fixed)
+    fixed = _strip_box_trailing_whitespace(fixed)
     return fixed
+
+
+BOX_CHARS_SET = set("│┌└├┐┘┤┬┴┼─")
+
+
+def _strip_box_trailing_whitespace(lines):
+    result = []
+    in_code = False
+    for line in lines:
+        raw = line.rstrip("\n")
+        if raw.strip().startswith("```"):
+            in_code = not in_code
+            result.append(line)
+            continue
+        if in_code:
+            box_count = sum(1 for c in raw if c in BOX_CHARS_SET)
+            if box_count >= 2:
+                stripped = raw.rstrip()
+                if stripped != raw:
+                    result.append(stripped + "\n" if line.endswith("\n") else stripped)
+                    continue
+        result.append(line)
+    return result
 
 
 def print_help():
