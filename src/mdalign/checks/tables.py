@@ -1,3 +1,23 @@
+def split_table_row(raw):
+    cells = []
+    current = ""
+    in_backtick = False
+    i = 0
+    while i < len(raw):
+        ch = raw[i]
+        if ch == "`":
+            in_backtick = not in_backtick
+            current += ch
+        elif ch == "|" and not in_backtick:
+            cells.append(current)
+            current = ""
+        else:
+            current += ch
+        i += 1
+    cells.append(current)
+    return cells
+
+
 def check(lines):
     errors = []
     sep_widths = None
@@ -5,7 +25,7 @@ def check(lines):
     for i, line in enumerate(lines):
         raw = line.rstrip("\n")
         if raw.startswith("|") and raw.endswith("|") and len(raw) > 2:
-            cells = raw.split("|")
+            cells = split_table_row(raw)
             widths = [len(c) for c in cells[1:-1]]
             if widths and all(c.strip().replace("-", "") == "" for c in cells[1:-1]):
                 sep_widths = widths
@@ -38,7 +58,7 @@ def fix(lines):
             sep_idx = None
             for ri, row_idx in enumerate(table_rows):
                 raw = result[row_idx].rstrip("\n")
-                cells = raw.split("|")[1:-1]
+                cells = split_table_row(raw)[1:-1]
                 all_cells.append(cells)
                 if cells and all(c.strip().replace("-", "") == "" for c in cells):
                     sep_idx = ri
