@@ -173,3 +173,9 @@ source .venv/bin/activate
 pip install -e ".[dev]"
 pytest -v
 ```
+
+```bash
+# dev alias (mdalign)
+ln -s $(pwd)/.venv/bin/doctrace ~/.local/bin/mdalignd   # install
+rm ~/.local/bin/mdalignd                                # remove
+```
