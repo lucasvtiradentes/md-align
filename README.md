@@ -3,17 +3,17 @@
 CLI utility that auto-fixes alignment issues in markdown documentation files - tables, box-drawing diagrams, list descriptions, and more.
 
 ```
-┌────────────────────┐       ┌────────────────────┐
-│  ┌────┐   ┌────┐  │        │  ┌────┐   ┌────┐   │
-│  │ A  │   │ B  │  │        │  │ A  │   │ B  │   │
-│  └──┬─┘   └──┬─┘  │        │  └──┬─┘   └──┬─┘   │
-│     │         │    │       │     │        │     │
-│     └────┬───┘     │  -->  │     └────┬───┘     │
-│           v        │       │          v         │
-│     ┌──────┐       │       │     ┌──────┐       │
- │     │  C   │       │      │     │  C   │       │
-│     └──────┘       │       │     └──────┘       │
-└────────────────────┘       └────────────────────┘
+┌───────────────────┐       ┌───────────────────┐
+│  ┌────┐   ┌────┐ │        │  ┌────┐   ┌────┐  │
+│  │ A  │   │ B  │ │        │  │ A  │   │ B  │  │
+│  └──┬─┘   └──┬─┘ │        │  └──┬─┘   └──┬─┘  │
+│     │         │   │       │     │        │    │
+│     └────┬───┘    │  -->  │     └────┬───┘    │
+│           v       │       │          v        │
+│     ┌──────┐      │       │     ┌──────┐      │
+ │     │  C   │      │      │     │  C   │      │
+│     └──────┘      │       │     └──────┘      │
+└───────────────────┘       └───────────────────┘
 ```
 
 <details>
@@ -22,10 +22,10 @@ CLI utility that auto-fixes alignment issues in markdown documentation files - t
 ### [Tables](tests/fixtures/checks/tables)
 
 ```
-| Service        | Usage                         |           | Service        | Usage                         |
-|----------------|-------------------------------|-----------|----------------|-------------------------------|
-| Linear API     | Status transitions, comments  |        -->| Linear API     | Status transitions, comments  |
-| GitHub API     | Repo clone, PR creation       |           | GitHub API     | Repo clone, PR creation       |
+| Service        | Usage                         |             | Service        | Usage                         |
+|----------------|-------------------------------|             |----------------|-------------------------------|
+| Linear API     | Status transitions, comments|        -->    | Linear API     | Status transitions, comments  |
+| GitHub API| Repo clone, PR creation       |                  | GitHub API     | Repo clone, PR creation       |
 ```
 
 ### [List descriptions](tests/fixtures/checks/list-descs)
@@ -38,10 +38,10 @@ CLI utility that auto-fixes alignment issues in markdown documentation files - t
 ### [Box widths](tests/fixtures/checks/box-widths)
 
 ```
-┌───────────────┐       ┌───────────────┐
-│  Linear UI    │    -->│  Linear UI    │
-│  (userscript) │       │  (userscript) │
-└───────────────┘       └───────────────┘
+┌──────────────┐       ┌───────────────┐
+│  Linear UI  │   -->  │  Linear UI    │
+│  (userscript)│       │  (userscript) │
+└──────────────┘       └───────────────┘
 ```
 
 ### [Rail alignment](tests/fixtures/checks/rails)
@@ -49,7 +49,7 @@ CLI utility that auto-fixes alignment issues in markdown documentation files - t
 ```
 ┌──────┬──────┐       ┌──────┬──────┐
 │      │      │       │      │      │
-│      │      │  -->  │      │      │
+│       │     │  -->  │      │      │
 │      │      │       │      │      │
 └──────┴──────┘       └──────┴──────┘
 ```
@@ -61,7 +61,7 @@ CLI utility that auto-fixes alignment issues in markdown documentation files - t
 │ step │                     │ step │
 └──┬───┘                     └──┬───┘
    │           -->              │
-   v                            v
+     v                          v
 ┌──────┐                     ┌──────┐
 │ next │                     │ next │
 └──────┘                     └──────┘
@@ -73,10 +73,10 @@ CLI utility that auto-fixes alignment issues in markdown documentation files - t
 ┌──────┬──────┐              ┌──────┬──────┐
 │ src  │ dest │              │ src  │ dest │
 └──────┴──┬───┘              └──────┴──┬───┘
-       │           -->              │
-       │                            │
+          │        -->                 │
+            │                          │
           │                            │
-┌──────┴──────┐              ┌──────┴──────┐
+┌─────────┴───┐              ┌─────────┴───┐
 │   output    │              │   output    │
 └─────────────┘              └─────────────┘
 ```
@@ -84,10 +84,10 @@ CLI utility that auto-fixes alignment issues in markdown documentation files - t
 ### [Box spacing](tests/fixtures/checks/box-spacing)
 
 ```
-┌────────────┐       ┌────────────┐
-│  errors[]  │       │  errors[]  │
-│  (strings) │  -->  │  (strings) │
-└────────────┘       └────────────┘
+┌───────────┐       ┌────────────┐
+│  errors[] │       │  errors[]  │
+│  (strings)│  -->  │  (strings) │
+└───────────┘       └────────────┘
 ```
 
 ### [Box walls](tests/fixtures/checks/box-walls)
@@ -96,7 +96,7 @@ CLI utility that auto-fixes alignment issues in markdown documentation files - t
 ┌──────────────────┐       ┌──────────────────┐
 │  content here    │       │  content here    │
 │  more text       │  -->  │  more text       │
-└──────────────────┘       └──────────────────┘
+└────────────────┘         └──────────────────┘
 ```
 
 </details>
@@ -176,6 +176,6 @@ pytest -v
 
 ```bash
 # dev alias (mdalign)
-ln -s $(pwd)/.venv/bin/doctrace ~/.local/bin/mdalignd   # install
-rm ~/.local/bin/mdalignd                                # remove
+ln -s $(pwd)/.venv/bin/docalign ~/.local/bin/docalignd   # install
+rm ~/.local/bin/docalignd                                # remove
 ```
