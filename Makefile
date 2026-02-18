@@ -13,7 +13,7 @@ test-all-checks:
 	.venv/bin/pytest -v -k "all-checks"
 
 practical-test:
-	.venv/bin/mdalign docs/ --fix
+	.venv/bin/docalign docs/ --fix
 
 changelog:
 	.venv/bin/towncrier build --yes --version $(shell python3 -c "import tomllib; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")

@@ -1,4 +1,4 @@
-from mdalign.constants import (
+from docalign.constants import (
     BOX_WALL_CLOSER_DRIFT,
     MIN_BOX_CONTENT_LINES,
     MIN_BOX_WIDTH,

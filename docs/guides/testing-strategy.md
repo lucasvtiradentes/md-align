@@ -20,7 +20,7 @@ Three test functions run for every fixture directory:
 
 Fixtures are organized into two groups:
 
-checks/ - per-module fixtures (1:1 with src/mdalign/checks/):
+checks/ - per-module fixtures (1:1 with src/docalign/checks/):
 
 | Category     | Count | Tests                                                              |
 |--------------|-------|--------------------------------------------------------------------|

@@ -1,6 +1,6 @@
 # Concepts
 
-Core domain concepts used throughout mdalign.
+Core domain concepts used throughout docalign.
 
 ## Box-drawing characters
 
@@ -143,5 +143,5 @@ related docs:
 - docs/features/box-wall-checking.md       - box wall checking implementation
 
 related sources:
-- src/mdalign/utils.py  - constant definitions and shared helpers
-- src/mdalign/parser.py - code block and box group detection
+- src/docalign/utils.py  - constant definitions and shared helpers
+- src/docalign/parser.py - code block and box group detection

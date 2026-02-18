@@ -1,6 +1,6 @@
 # Pipe Continuity
 
-Module: `src/mdalign/checks/pipes.py`
+Module: `src/docalign/checks/pipes.py`
 
 ## What it does
 
@@ -65,5 +65,5 @@ related docs:
 - docs/architecture.md - position in convergence loop
 
 related sources:
-- src/mdalign/checks/pipes.py - check and fix implementation
-- src/mdalign/utils.py        - PIPE_DRIFT_MAX, _find_nearby_isolated_pipe, _shift_pipe
+- src/docalign/checks/pipes.py - check and fix implementation
+- src/docalign/utils.py        - PIPE_DRIFT_MAX, _find_nearby_isolated_pipe, _shift_pipe

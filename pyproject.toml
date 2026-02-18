@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "mdalign"
+name = "docalign"
 version = "0.3.3"
 description = "Auto-fix alignment in markdown docs"
 readme = "README.md"
@@ -13,10 +13,10 @@ requires-python = ">=3.9"
 dev = ["pytest>=7", "ruff>=0.9", "towncrier>=23", "bump2version>=1"]
 
 [project.scripts]
-mdalign = "mdalign.cli:main"
+docalign = "docalign.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/mdalign"]
+packages = ["src/docalign"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -4,7 +4,7 @@ import os
 import sys
 from importlib.metadata import version as pkg_version
 
-from mdalign.checks import (
+from docalign.checks import (
     arrows,
     box_padding,
     box_spacing,
@@ -18,8 +18,8 @@ from mdalign.checks import (
     tables,
     wide_chars,
 )
-from mdalign.constants import BOX_CHARS_WITH_DASH, FIX_ITERATIONS, MIN_BOX_CHARS_FOR_STRIP
-from mdalign.hints import get_hint
+from docalign.constants import BOX_CHARS_WITH_DASH, FIX_ITERATIONS, MIN_BOX_CHARS_FOR_STRIP
+from docalign.hints import get_hint
 
 CHECK_MODULES = {
     "tables": tables,
@@ -96,7 +96,7 @@ def _strip_box_trailing_whitespace(lines):
 
 
 def print_help():
-    print("""mdalign - Auto-fix alignment issues in markdown documentation files.
+    print("""docalign - Auto-fix alignment issues in markdown documentation files.
 
 Checks and fixes:
   1. Tables           - pads cells so every column matches the separator row width
@@ -113,14 +113,14 @@ Checks and fixes:
  12. Wide chars       - detects ambiguous/double-width Unicode chars in code blocks
 
 Usage:
-  mdalign <path>                        # check-only (default)
-  mdalign --check <path>                # explicit check-only
-  mdalign --fix <path>                  # auto-fix files in place
-  mdalign --diff <path>                 # show unified diff of changes
-  mdalign --verbose <path>              # show actionable hints with each error
-  mdalign --ignore tables,pipes <path>  # skip specific checks
-  mdalign --help                        # show this help
-  mdalign --version                     # show version
+  docalign <path>                        # check-only (default)
+  docalign --check <path>                # explicit check-only
+  docalign --fix <path>                  # auto-fix files in place
+  docalign --diff <path>                 # show unified diff of changes
+  docalign --verbose <path>              # show actionable hints with each error
+  docalign --ignore tables,pipes <path>  # skip specific checks
+  docalign --help                        # show this help
+  docalign --version                     # show version
 
 Paths can be files, directories, or glob patterns (e.g. "docs/**/*.md").
 
@@ -172,7 +172,7 @@ def main():
         sys.exit(0)
 
     if "--version" in sys.argv or "-v" in sys.argv:
-        print(pkg_version("mdalign"))
+        print(pkg_version("docalign"))
         sys.exit(0)
 
     fix_mode = "--fix" in sys.argv

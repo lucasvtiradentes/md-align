@@ -1,6 +1,6 @@
 # Table Alignment
 
-Module: `src/mdalign/checks/tables.py`
+Module: `src/docalign/checks/tables.py`
 
 ## What it does
 
@@ -60,4 +60,4 @@ related docs:
 - docs/architecture.md - position in fix pipeline
 
 related sources:
-- src/mdalign/checks/tables.py - check and fix implementation
+- src/docalign/checks/tables.py - check and fix implementation

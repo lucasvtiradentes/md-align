@@ -1,12 +1,12 @@
-from mdalign.constants import (
+from docalign.constants import (
     BORDER_CHARS,
     BOX_CHARS,
     LARGE_SPACE_GAP,
     MAX_FIX_ITERATIONS,
     MIN_PAD,
 )
-from mdalign.parser import iter_code_blocks
-from mdalign.utils import _find_boxes, _is_tree_block
+from docalign.parser import iter_code_blocks
+from docalign.utils import _find_boxes, _is_tree_block
 
 
 def check(lines):

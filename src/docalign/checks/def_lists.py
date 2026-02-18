@@ -1,7 +1,7 @@
 import re
 
-from mdalign.constants import MAX_KEY_WORDS, MIN_GROUP_SIZE
-from mdalign.parser import in_code_block
+from docalign.constants import MAX_KEY_WORDS, MIN_GROUP_SIZE
+from docalign.parser import in_code_block
 
 _PREFIX = re.compile(r"^(\s*- )")
 _URL_COLON = re.compile(r"https?:|ftp:|file:")

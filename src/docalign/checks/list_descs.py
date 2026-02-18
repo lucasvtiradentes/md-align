@@ -1,7 +1,7 @@
 import re
 
-from mdalign.constants import MIN_GROUP_SIZE
-from mdalign.parser import in_code_block
+from docalign.constants import MIN_GROUP_SIZE
+from docalign.parser import in_code_block
 
 
 def _parse_line(raw):

@@ -1,12 +1,12 @@
-from mdalign.constants import (
+from docalign.constants import (
     BOX_CHARS,
     BOX_WALL_DRIFT,
     LARGE_SPACE_GAP,
     MIN_BOX_WIDTH,
     MIN_PIPES_FOR_ADJACENT,
 )
-from mdalign.parser import iter_code_blocks
-from mdalign.utils import (
+from docalign.parser import iter_code_blocks
+from docalign.utils import (
     _find_box_closer,
     _find_nearby_closer_start,
     _find_nearby_pipe,
@@ -184,7 +184,7 @@ def _fix_box_walls_in_block(code_indices, all_lines):
             changed = False
 
             if fuzzy_col_left is not None:
-                from mdalign.utils import _realign_box_chars
+                from docalign.utils import _realign_box_chars
 
                 cur = all_lines[closing_line_idx].rstrip("\n")
                 actual_positions = [k for k, c in enumerate(cur) if c in BOX_CHARS]

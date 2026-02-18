@@ -1,8 +1,8 @@
 from collections import Counter
 
-from mdalign.constants import BOX_CHARS, MAX_PAD_DRIFT
-from mdalign.parser import iter_code_blocks
-from mdalign.utils import _find_boxes, _is_tree_block
+from docalign.constants import BOX_CHARS, MAX_PAD_DRIFT
+from docalign.parser import iter_code_blocks
+from docalign.utils import _find_boxes, _is_tree_block
 
 
 def check(lines):

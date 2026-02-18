@@ -1,6 +1,6 @@
 # Box Width Normalization
 
-Module: `src/mdalign/checks/box_widths.py`
+Module: `src/docalign/checks/box_widths.py`
 
 ## What it does
 
@@ -69,6 +69,6 @@ related docs:
 - docs/architecture.md - position in fix pipeline
 
 related sources:
-- src/mdalign/checks/box_widths.py - check and fix implementation
-- src/mdalign/parser.py            - code block and box group detection
-- src/mdalign/utils.py             - BOX_CHARS, BOX_OPENERS, BOX_CLOSERS constants
+- src/docalign/checks/box_widths.py - check and fix implementation
+- src/docalign/parser.py            - code block and box group detection
+- src/docalign/utils.py             - BOX_CHARS, BOX_OPENERS, BOX_CLOSERS constants

@@ -11,7 +11,7 @@
 
 ```
 md-align/
-├── src/mdalign/
+├── src/docalign/
 │   ├── __init__.py          re-exports run_checks, run_fixes
 │   ├── cli.py               main entrypoint, arg parsing, orchestration
 │   ├── parser.py            iter_code_blocks, group_box_lines
@@ -87,5 +87,5 @@ related docs:
 related sources:
 - pyproject.toml - package metadata, tool configs
 - Makefile       - task runner targets
-- src/mdalign/   - source modules
+- src/docalign/   - source modules
 - tests/         - test suite and fixtures

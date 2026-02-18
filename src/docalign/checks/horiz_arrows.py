@@ -1,8 +1,8 @@
 import re
 
-from mdalign.constants import BOX_CORNERS
-from mdalign.parser import iter_code_blocks
-from mdalign.utils import _is_tree_block
+from docalign.constants import BOX_CORNERS
+from docalign.parser import iter_code_blocks
+from docalign.utils import _is_tree_block
 
 _RIGHT_ARROW = re.compile(r"─+(>)")
 _LEFT_ARROW = re.compile(r"(<)─+")

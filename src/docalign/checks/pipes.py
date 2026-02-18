@@ -1,6 +1,6 @@
-from mdalign.constants import BOX_CHARS, PIPE_DRIFT_MAX
-from mdalign.parser import iter_code_blocks
-from mdalign.utils import _find_nearby_pipe, _is_tree_block, _shift_pipe
+from docalign.constants import BOX_CHARS, PIPE_DRIFT_MAX
+from docalign.parser import iter_code_blocks
+from docalign.utils import _find_nearby_pipe, _is_tree_block, _shift_pipe
 
 
 def check(lines):

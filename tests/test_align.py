@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from mdalign.cli import run_checks, run_fixes
+from docalign.cli import run_checks, run_fixes
 
 FIXTURES = Path(__file__).parent / "fixtures"
 

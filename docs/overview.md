@@ -1,6 +1,6 @@
 # Overview
 
-mdalign is a Python CLI tool that auto-fixes alignment issues in markdown documentation files containing box-drawing diagrams, tables, and list descriptions. It detects and corrects twelve categories of alignment problems.
+docalign is a Python CLI tool that auto-fixes alignment issues in markdown documentation files containing box-drawing diagrams, tables, and list descriptions. It detects and corrects twelve categories of alignment problems.
 
 Repository: github.com/lucasvtiradentes/md-align
 
@@ -53,5 +53,5 @@ Repository: github.com/lucasvtiradentes/md-align
 related sources:
 - README.md      - project description and usage instructions
 - pyproject.toml - package metadata, dependencies, scripts
-- src/mdalign/   - all source modules
+- src/docalign/   - all source modules
 - tests/         - test suite and fixture data

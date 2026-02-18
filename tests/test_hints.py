@@ -1,6 +1,6 @@
 import pytest
 
-from mdalign.hints import get_hint
+from docalign.hints import get_hint
 
 
 @pytest.mark.parametrize(

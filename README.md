@@ -128,14 +128,14 @@ When docs are visually harmonious - with aligned columns, consistent box widths,
 ## Commands
 
 ```bash
-mdalign <path>                        # check-only (default) - detect issues, no writes
-mdalign --check <path>                # explicit check-only (same as default)
-mdalign --fix <path>                  # auto-fix files in place
-mdalign --diff <path>                 # show unified diff of what would change
-mdalign --verbose <path>              # show actionable hints with each error
-mdalign --ignore tables,pipes <path>  # skip specific checks
-mdalign --help                        # show help
-mdalign --version                     # show version
+docalign <path>                        # check-only (default) - detect issues, no writes
+docalign --check <path>                # explicit check-only (same as default)
+docalign --fix <path>                  # auto-fix files in place
+docalign --diff <path>                 # show unified diff of what would change
+docalign --verbose <path>              # show actionable hints with each error
+docalign --ignore tables,pipes <path>  # skip specific checks
+docalign --help                        # show help
+docalign --version                     # show version
 ```
 
 Paths can be files, directories, or glob patterns (e.g. `"docs/**/*.md"`).
@@ -147,22 +147,22 @@ Exit codes: 0 = all aligned, 1 = issues found.
 ### Install
 
 ```bash
-pipx install mdalign
-# pip install mdalign
+pipx install docalign
+# pip install docalign
 ```
 
 ### Update
 
 ```bash
-pipx upgrade mdalign
-# pip install --upgrade mdalign
+pipx upgrade docalign
+# pip install --upgrade docalign
 ```
 
 ### Uninstall
 
 ```bash
-pipx uninstall mdalign
-# pip uninstall mdalign
+pipx uninstall docalign
+# pip uninstall docalign
 ```
 
 ## Development

@@ -8,14 +8,14 @@ source .venv/bin/activate
 pip install -e ".[dev]"
 ```
 
-The `mdalign` command becomes available after installation via the entry point defined in pyproject.toml.
+The `docalign` command becomes available after installation via the entry point defined in pyproject.toml.
 
 ## Commands
 
 ### Check-only mode (default)
 
 ```
-mdalign <file_or_folder>
+docalign <file_or_folder>
 ```
 
 - Detects alignment issues without writing any changes
@@ -26,7 +26,7 @@ mdalign <file_or_folder>
 ### Auto-fix mode
 
 ```
-mdalign --fix <file_or_folder>
+docalign --fix <file_or_folder>
 ```
 
 - Reads each .md file, detects alignment issues, writes corrected output in-place
@@ -36,7 +36,7 @@ mdalign --fix <file_or_folder>
 ### Diff mode
 
 ```
-mdalign --diff <file_or_folder>
+docalign --diff <file_or_folder>
 ```
 
 - Shows unified diff of what would change, without writing
@@ -45,7 +45,7 @@ mdalign --diff <file_or_folder>
 ### Ignoring checks
 
 ```
-mdalign --ignore tables,pipes <file_or_folder>
+docalign --ignore tables,pipes <file_or_folder>
 ```
 
 - Skips specific checks by name (comma-separated)
@@ -54,8 +54,8 @@ mdalign --ignore tables,pipes <file_or_folder>
 ### Help and version
 
 ```
-mdalign --help
-mdalign --version
+docalign --help
+docalign --version
 ```
 
 ## Exit codes
@@ -69,7 +69,7 @@ mdalign --version
 
 ```
 ┌────────────────────────────────────┐
-│  mdalign <path>                    │
+│  docalign <path>                    │
 └────────────┬───────────────────────┘
              │
              v
@@ -118,7 +118,7 @@ path/to/other.md: 1 unfixable issue(s):
 
 ## Recursive scanning
 
-When given a directory, mdalign walks all subdirectories and collects every `.md` file. Files are processed in sorted order. The path passed to _collect_files is converted to absolute via os.path.abspath.
+When given a directory, docalign walks all subdirectories and collects every `.md` file. Files are processed in sorted order. The path passed to _collect_files is converted to absolute via os.path.abspath.
 
 ---
 
@@ -127,4 +127,4 @@ related docs:
 - docs/rules.md        - module interface conventions
 
 related sources:
-- src/mdalign/cli.py - CLI implementation, argument parsing, file collection
+- src/docalign/cli.py - CLI implementation, argument parsing, file collection

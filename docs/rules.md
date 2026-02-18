@@ -1,6 +1,6 @@
 # Rules
 
-Design principles, conventions, and anti-patterns for mdalign.
+Design principles, conventions, and anti-patterns for docalign.
 
 ## Design principles
 
@@ -88,6 +88,6 @@ related docs:
 - docs/concepts.md     - domain terminology referenced here
 
 related sources:
-- src/mdalign/cli.py    - pipeline orchestration, check/fix dispatch
-- src/mdalign/utils.py  - shared constants and helpers
-- src/mdalign/parser.py - code block detection shared by most modules
+- src/docalign/cli.py    - pipeline orchestration, check/fix dispatch
+- src/docalign/utils.py  - shared constants and helpers
+- src/docalign/parser.py - code block detection shared by most modules

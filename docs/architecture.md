@@ -1,6 +1,6 @@
 # Architecture
 
-mdalign is a pure Python CLI utility with a modular fix pipeline. Each alignment concern is isolated in its own module, all sharing a common check/fix interface.
+docalign is a pure Python CLI utility with a modular fix pipeline. Each alignment concern is isolated in its own module, all sharing a common check/fix interface.
 
 ## Entry point
 
@@ -182,7 +182,7 @@ related docs:
 - docs/features/box-wall-checking.md       - box_walls.fix stage details
 
 related sources:
-- src/mdalign/cli.py    - entry point, pipeline orchestration
-- src/mdalign/parser.py - code block iteration, box line grouping
-- src/mdalign/utils.py  - constants, shared utility functions
-- src/mdalign/checks/   - all check/fix modules
+- src/docalign/cli.py    - entry point, pipeline orchestration
+- src/docalign/parser.py - code block iteration, box line grouping
+- src/docalign/utils.py  - constants, shared utility functions
+- src/docalign/checks/   - all check/fix modules

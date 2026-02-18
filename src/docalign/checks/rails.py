@@ -1,4 +1,4 @@
-from mdalign.constants import (
+from docalign.constants import (
     BOX_CHARS,
     BOX_CLOSERS,
     BOX_OPENERS,
@@ -14,8 +14,8 @@ from mdalign.constants import (
     RAIL_MAX_GAP,
     RAIL_THRESHOLD,
 )
-from mdalign.parser import group_box_lines, iter_code_blocks
-from mdalign.utils import _is_tree_block, _realign_box_chars
+from docalign.parser import group_box_lines, iter_code_blocks
+from docalign.utils import _is_tree_block, _realign_box_chars
 
 
 def check(lines):

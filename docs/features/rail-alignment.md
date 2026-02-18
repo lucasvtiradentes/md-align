@@ -1,6 +1,6 @@
 # Rail Alignment
 
-Module: `src/mdalign/checks/rails.py`
+Module: `src/docalign/checks/rails.py`
 
 ## What it does
 
@@ -84,5 +84,5 @@ related docs:
 - docs/architecture.md - position in convergence loop
 
 related sources:
-- src/mdalign/checks/rails.py - check and fix implementation
-- src/mdalign/utils.py        - RAIL_THRESHOLD, RAIL_MAX_GAP, CLUSTER_THRESHOLD, _realign_box_chars
+- src/docalign/checks/rails.py - check and fix implementation
+- src/docalign/utils.py        - RAIL_THRESHOLD, RAIL_MAX_GAP, CLUSTER_THRESHOLD, _realign_box_chars
