@@ -26,14 +26,22 @@ def check(lines):
         raw = line.rstrip("\n")
         if raw.startswith("|") and raw.endswith("|") and len(raw) > 2:
             cells = split_table_row(raw)
-            widths = [len(c) for c in cells[1:-1]]
-            if widths and all(c.strip().replace("-", "") == "" for c in cells[1:-1]):
+            inner_cells = cells[1:-1]
+            widths = [len(c) for c in inner_cells]
+            is_sep = widths and all(c.strip().replace("-", "") == "" for c in inner_cells)
+            if is_sep:
                 sep_widths = widths
                 sep_line = i + 1
             elif sep_widths:
                 for ci, (w, ew) in enumerate(zip(widths, sep_widths)):
                     if w != ew:
                         errors.append(f"L{i + 1} table col{ci}: width={w} expected={ew} (separator at L{sep_line})")
+            if not is_sep:
+                for ci, cell in enumerate(inner_cells):
+                    if cell and not cell.startswith(" "):
+                        errors.append(f"L{i + 1} table col{ci}: missing space after |")
+                    if cell and not cell.endswith(" "):
+                        errors.append(f"L{i + 1} table col{ci}: missing space before |")
         else:
             sep_widths = None
     return errors
@@ -68,9 +76,11 @@ def fix(lines):
 
             num_cols = max(len(c) for c in all_cells)
             max_widths = [0] * num_cols
-            for cells in all_cells:
+            for ri, cells in enumerate(all_cells):
+                if ri == sep_idx:
+                    continue
                 for ci, cell in enumerate(cells):
-                    w = len(cell.rstrip(" "))
+                    w = len(cell.strip())
                     if w > max_widths[ci]:
                         max_widths[ci] = w
 
@@ -81,10 +91,10 @@ def fix(lines):
                 for ci, cell in enumerate(cells):
                     target = max_widths[ci]
                     if is_sep:
-                        new_cells.append("-" * target)
+                        new_cells.append("-" * (target + 2))
                     else:
-                        content = cell.rstrip(" ")
-                        new_cells.append(content + " " * (target - len(content)))
+                        content = cell.strip()
+                        new_cells.append(" " + content + " " * (target - len(content)) + " ")
                 result[row_idx] = "|" + "|".join(new_cells) + "|\n"
         else:
             i += 1

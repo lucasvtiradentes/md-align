@@ -5,6 +5,12 @@
 | Linear API     | Status transitions, comments|
 | GitHub API| Repo clone, PR creation       |
 
+## tables - cell spacing
+
+|Name|Type  |
+|----|------|
+|foo |string|
+
 ## box-widths - trailing space + border vs content
 
 ```

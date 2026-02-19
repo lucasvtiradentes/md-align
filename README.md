@@ -22,10 +22,10 @@ CLI utility that auto-fixes alignment issues in markdown documentation files - t
 ### [Tables](tests/fixtures/checks/tables)
 
 ```
-| Service        | Usage                         |             | Service        | Usage                         |
-|----------------|-------------------------------|             |----------------|-------------------------------|
-| Linear API     | Status transitions, comments|        -->    | Linear API     | Status transitions, comments  |
-| GitHub API| Repo clone, PR creation       |                  | GitHub API     | Repo clone, PR creation       |
+| Service        | Usage                         |             | Service    | Usage                        |
+|----------------|-------------------------------|             |------------|------------------------------|
+| Linear API     | Status transitions, comments|        -->    | Linear API | Status transitions, comments |
+| GitHub API| Repo clone, PR creation       |                  | GitHub API | Repo clone, PR creation      |
 ```
 
 ### [List descriptions](tests/fixtures/checks/list-descs)
@@ -112,7 +112,7 @@ When docs are visually harmonious - with aligned columns, consistent box widths,
 - flexible paths - files, directories, or glob patterns (e.g. `"docs/**/*.md"`)
 - CI-friendly    - exit code 0 when aligned, 1 when issues found
 - 12 alignment checks:
-  - [Table columns](tests/fixtures/checks/tables)           - pads cells so every column matches the separator row width
+  - [Table columns](tests/fixtures/checks/tables)           - aligns columns and ensures `| content |` spacing in cells
   - [Box widths](tests/fixtures/checks/box-widths)          - ensures all lines in a box group have the same total length
   - [Box padding](tests/fixtures/checks/box-padding)        - normalizes left-padding of content lines inside boxes
   - [Horizontal arrows](tests/fixtures/checks/horiz-arrows) - closes gaps between `─>` / `<─` arrow tips and box walls

@@ -4,7 +4,11 @@ Module: `src/docalign/checks/tables.py`
 
 ## What it does
 
-Detects markdown tables where data row cell widths do not match the separator row column widths, then pads all cells to uniform width.
+Detects markdown tables where:
+- data row cell widths do not match the separator row column widths
+- cells are missing spaces after `|` or before `|`
+
+Then normalizes all cells to `| content |` format with proper spacing and alignment.
 
 ## Detection
 
@@ -28,23 +32,26 @@ A table is identified by consecutive lines starting and ending with `|`. The sep
 
 ## Check output
 
-Format: `L{line} table col{n}: width={actual} expected={sep_width} (separator at L{sep_line})`
+Formats:
+- `L{line} table col{n}: width={actual} expected={sep_width} (separator at L{sep_line})`
+- `L{line} table col{n}: missing space after |`
+- `L{line} table col{n}: missing space before |`
 
 ## Fix algorithm
 
 1. Collect all consecutive table rows (lines matching `|...|`)
 2. Find the separator row index
-3. Calculate max width per column across all rows (using content width, ignoring trailing spaces)
+3. Calculate max width per column across all rows (using stripped content, excluding separator)
 4. Rewrite each row:
-   - Separator cells: fill with dashes to target width
-   - Data cells:      right-pad content with spaces to target width
+   - Separator cells: fill with dashes to target width + 2 (for spaces)
+   - Data cells:      `| ` + content + padding + ` |`
 
 ```
 Input:                   Fixed:
-|Name |Age||Name |Age|
-|-----|---||-----|---|
-|Alice|30 ||Alice|30 |
-|Bob  |7  ||Bob  |7  |
+|Name |Age|              | Name  | Age |
+|-----|---|              |-------|-----|
+|Alice|30 |              | Alice | 30  |
+|Bob  |7  |              | Bob   | 7   |
 ```
 
 ## Scope
