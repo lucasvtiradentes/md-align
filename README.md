@@ -16,10 +16,15 @@ CLI utility that auto-fixes alignment issues in markdown documentation files - t
 └───────────────────┘       └───────────────────┘
 ```
 
+<div align="center">
+
 <details>
-<summary>More examples</summary>
+<summary>See all 12 checks</summary>
+
+<div align="left">
 
 ### [Tables](tests/fixtures/checks/tables)
+Aligns columns and ensures `| content |` spacing in cells.
 
 ```
 | Service        | Usage                         |             | Service    | Usage                        |
@@ -29,13 +34,24 @@ CLI utility that auto-fixes alignment issues in markdown documentation files - t
 ```
 
 ### [List descriptions](tests/fixtures/checks/list-descs)
+Aligns the separator dash in list item descriptions.
 
 ```
 - docs/repo.md - mirrors CI steps                       - docs/repo.md                    - mirrors CI steps
 - docs/guides/testing-strategy.md - test suite  -->     - docs/guides/testing-strategy.md - test suite
 ```
 
+### [Definition lists](tests/fixtures/checks/def-lists)
+Aligns the `:` separator in key-value list items.
+
+```
+- timeout: 30s                    - timeout:         30s
+- retries: 3               -->    - retries:         3
+- max-connections: 100            - max-connections: 100
+```
+
 ### [Box widths](tests/fixtures/checks/box-widths)
+Ensures all lines in a box group have the same total length.
 
 ```
 ┌──────────────┐       ┌───────────────┐
@@ -45,6 +61,7 @@ CLI utility that auto-fixes alignment issues in markdown documentation files - t
 ```
 
 ### [Rail alignment](tests/fixtures/checks/rails)
+Aligns vertically adjacent box chars to the same column.
 
 ```
 ┌──────┬──────┐       ┌──────┬──────┐
@@ -55,6 +72,7 @@ CLI utility that auto-fixes alignment issues in markdown documentation files - t
 ```
 
 ### [Arrow alignment](tests/fixtures/checks/arrows)
+Aligns standalone `v`/`^` arrows with their source pipes.
 
 ```
 ┌──────┐                     ┌──────┐
@@ -68,20 +86,22 @@ CLI utility that auto-fixes alignment issues in markdown documentation files - t
 ```
 
 ### [Pipe continuity](tests/fixtures/checks/pipes)
+Traces from T-junctions to detect drifted connector pipes.
 
 ```
 ┌──────┬──────┐              ┌──────┬──────┐
 │ src  │ dest │              │ src  │ dest │
-└──────┴──┬───┘              └──────┴──┬───┘
-          │        -->                 │
-            │                          │
-          │                            │
-┌─────────┴───┐              ┌─────────┴───┐
+└──────┴──┬───┘              └──────┬──────┘
+       │           -->              │
+       │                            │
+          │                         │
+┌──────┴──────┐              ┌──────┴──────┐
 │   output    │              │   output    │
 └─────────────┘              └─────────────┘
 ```
 
 ### [Box spacing](tests/fixtures/checks/box-spacing)
+Ensures minimum right-side spacing between content and box wall.
 
 ```
 ┌───────────┐       ┌────────────┐
@@ -91,6 +111,7 @@ CLI utility that auto-fixes alignment issues in markdown documentation files - t
 ```
 
 ### [Box walls](tests/fixtures/checks/box-walls)
+Verifies nested box right walls match their opening/closing borders.
 
 ```
 ┌──────────────────┐       ┌──────────────────┐
@@ -99,31 +120,51 @@ CLI utility that auto-fixes alignment issues in markdown documentation files - t
 └────────────────┘         └──────────────────┘
 ```
 
+### [Box padding](tests/fixtures/checks/box-padding)
+Normalizes left-padding of content lines inside boxes.
+
+```
+┌──────────────┐       ┌──────────────┐
+│ validateAuth │       │ validateAuth │
+│ compare with │  -->  │ compare with │
+└──────────────┘       └──────────────┘
+```
+
+### [Horizontal arrows](tests/fixtures/checks/horiz-arrows)
+Closes gaps between arrow tips and box walls.
+
+```
+┌──────┐          ┌──────┐       ┌──────┐          ┌──────┐
+│ Src  │─────────>│ Dest │  -->  │ Src  │─────────>│ Dest │
+└──────┘          └──────┘       └──────┘          └──────┘
+```
+
+### [Wide chars](tests/fixtures/checks/wide-chars)
+Detects ambiguous/double-width Unicode chars in code blocks.
+
+```
+┌──────────┐
+│ ▶ start  │  -->  warning: wide char '▶' (U+25B6) at col 2
+│ ● status │
+└──────────┘
+```
+
+</div>
+
 </details>
+
+</div>
 
 ## Motivation
 
-In the era of agentic engineering, documentation is the most critical artifact in any codebase. It guides both humans and AI agents.
-When docs are visually harmonious - with aligned columns, consistent box widths, and straight connector lines - they become easier to read, parse, and maintain by everyone.
+In the era of agentic engineering, documentation is the most critical artifact in any codebase. It guides both humans and AI agents. When docs are visually harmonious - with aligned columns, consistent box widths, and straight connector lines - they become easier to read, parse, and maintain by everyone.
 
 ## Features
 
 - 3 modes        - check (default), auto-fix in place, or unified diff
 - flexible paths - files, directories, or glob patterns (e.g. `"docs/**/*.md"`)
 - CI-friendly    - exit code 0 when aligned, 1 when issues found
-- 12 alignment checks:
-  - [Table columns](tests/fixtures/checks/tables)           - aligns columns and ensures `| content |` spacing in cells
-  - [Box widths](tests/fixtures/checks/box-widths)          - ensures all lines in a box group have the same total length
-  - [Box padding](tests/fixtures/checks/box-padding)        - normalizes left-padding of content lines inside boxes
-  - [Horizontal arrows](tests/fixtures/checks/horiz-arrows) - closes gaps between `─>` / `<─` arrow tips and box walls
-  - [Rail alignment](tests/fixtures/checks/rails)           - aligns vertically adjacent box chars to the same column
-  - [Arrow alignment](tests/fixtures/checks/arrows)         - aligns standalone `v`/`^` arrows; detects `v`/`^` embedded in borders
-  - [Pipe continuity](tests/fixtures/checks/pipes)          - traces from T-junctions to detect drifted connector pipes
-  - [Box spacing](tests/fixtures/checks/box-spacing)        - ensures minimum right-side spacing between content and box wall
-  - [Box walls](tests/fixtures/checks/box-walls)            - verifies nested box right walls match their opening/closing borders
-  - [List descriptions](tests/fixtures/checks/list-descs)   - aligns the separator dash in list item descriptions
-  - [Definition lists](tests/fixtures/checks/def-lists)     - aligns the `:` separator in `key: value` list items
-  - [Wide chars](tests/fixtures/checks/wide-chars)          - detects ambiguous/double-width Unicode chars in code blocks
+- 12 checks      - tables, boxes, arrows, pipes, lists (see examples above)
 
 ## Commands
 

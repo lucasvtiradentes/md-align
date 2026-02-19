@@ -60,10 +60,10 @@ docalign --version
 
 ## Exit codes
 
-| Code | Meaning                                                 |
-|------|---------------------------------------------------------|
-| 0    | All docs aligned (no errors found or all auto-fixed)    |
-| 1    | Issues found (check mode) or unfixable issues (fix mode)|
+| Code | Meaning                                                  |
+|------|----------------------------------------------------------|
+| 0    | All docs aligned (no errors found or all auto-fixed)     |
+| 1    | Issues found (check mode) or unfixable issues (fix mode) |
 
 ## Execution flow
 

@@ -48,10 +48,10 @@ Formats:
 
 ```
 Input:                   Fixed:
-|Name |Age|              | Name  | Age |
-|-----|---|              |-------|-----|
-|Alice|30 |              | Alice | 30  |
-|Bob  |7  |              | Bob   | 7   |
+| Name  | Age |  | Name  | Age |
+|-------|-----|--|-------|-----|
+| Alice | 30  |  | Alice | 30  |
+| Bob   | 7   |  | Bob   | 7   |
 ```
 
 ## Scope

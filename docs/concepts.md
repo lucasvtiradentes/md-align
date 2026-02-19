@@ -6,19 +6,19 @@ Core domain concepts used throughout docalign.
 
 Unicode characters used to draw diagram borders and connectors:
 
-| Char | Name          | Role                           |
-|------|---------------|--------------------------------|
-| ┌    | top-left      | opens a box top border         |
-| ┐    | top-right     | closes a box top border        |
-| └    | bottom-left   | opens a box bottom border      |
-| ┘    | bottom-right  | closes a box bottom border     |
-| ├    | left-tee      | left wall junction             |
-| ┤    | right-tee     | right wall junction            |
-| ┬    | top-tee       | top T-junction (pipe origin)   |
-| ┴    | bottom-tee    | bottom T-junction (pipe origin)|
-| │    | vertical pipe | vertical connector / wall      |
-| ┼    | cross         | crossing junction              |
-| ─    | horizontal    | horizontal border segment      |
+| Char | Name          | Role                            |
+|------|---------------|---------------------------------|
+| ┌    | top-left      | opens a box top border          |
+| ┐    | top-right     | closes a box top border         |
+| └    | bottom-left   | opens a box bottom border       |
+| ┘    | bottom-right  | closes a box bottom border      |
+| ├    | left-tee      | left wall junction              |
+| ┤    | right-tee     | right wall junction             |
+| ┬    | top-tee       | top T-junction (pipe origin)    |
+| ┴    | bottom-tee    | bottom T-junction (pipe origin) |
+| │    | vertical pipe | vertical connector / wall       |
+| ┼    | cross         | crossing junction               |
+| ─    | horizontal    | horizontal border segment       |
 
 These are defined in `utils.py` as `BOX_CHARS = set("│┌└├┐┘┤┬┴┼")`.
 
@@ -28,9 +28,9 @@ Markdown tables use `|` delimiters. A separator row (containing only dashes and 
 
 ```
 Before fix:                After fix:
-|Name |Age||Name |Age|
-|-----|---||-----|---|
-|Alice|30 ||Alice|30 |
+| Name  | Age |  | Name  | Age |
+|-------|-----|--|-------|-----|
+| Alice | 30  |  | Alice | 30  |
 ```
 
 ## Box groups
@@ -123,13 +123,13 @@ Most checks operate within fenced code blocks (delimited by triple backticks). T
 
 ## Constants
 
-| Constant         | Value | Usage                                     |
-|------------------|-------|-------------------------------------------|
-| RAIL_THRESHOLD   | 1     | Max column offset to join a rail cluster  |
-| RAIL_MAX_GAP     | 1     | Max empty lines between rail entries      |
-| CLUSTER_THRESHOLD| 3     | Max column distance for position clusters |
-| BOX_WALL_DRIFT   | 8     | Max column drift for box wall matching    |
-| PIPE_DRIFT_MAX   | 5     | Max column drift for pipe detection       |
+| Constant          | Value | Usage                                     |
+|-------------------|-------|-------------------------------------------|
+| RAIL_THRESHOLD    | 1     | Max column offset to join a rail cluster  |
+| RAIL_MAX_GAP      | 1     | Max empty lines between rail entries      |
+| CLUSTER_THRESHOLD | 3     | Max column distance for position clusters |
+| BOX_WALL_DRIFT    | 8     | Max column drift for box wall matching    |
+| PIPE_DRIFT_MAX    | 5     | Max column drift for pipe detection       |
 
 ---
 

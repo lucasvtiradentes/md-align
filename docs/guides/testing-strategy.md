@@ -10,11 +10,11 @@
 
 Three test functions run for every fixture directory:
 
-| Test                       | What it verifies                                            |
-|----------------------------|-------------------------------------------------------------|
-| test_check_detects_issues  | run_checks returns errors when input differs from expected  |
-| test_fix_produces_expected | run_fixes(input) produces output matching expected.md       |
-| test_fix_is_idempotent     | run_fixes(expected) returns expected unchanged              |
+| Test                       | What it verifies                                           |
+|----------------------------|------------------------------------------------------------|
+| test_check_detects_issues  | run_checks returns errors when input differs from expected |
+| test_fix_produces_expected | run_fixes(input) produces output matching expected.md      |
+| test_fix_is_idempotent     | run_fixes(expected) returns expected unchanged             |
 
 ## Fixture categories
 
@@ -41,14 +41,14 @@ all-checks/ - single combined fixture covering all 12 checks.
 
 general/ - integration and edge case fixtures:
 
-| Category     | Count | Tests                                                     |
-|--------------|-------|-----------------------------------------------------------|
-| trees        | 2     | Schema tree, flow tree (should be skipped)                |
-| mixed        | 1     | Multiple issue types in one file                          |
-| nested       | 2     | Deep nested boxes, tree inside box                        |
-| multi-column | 2     | Sequence diagram, branching flow                          |
-| deploy       | 1     | Pipeline with merge diagram                               |
-| edge-cases   | 5     | Empty file, no code blocks, unclosed, unicode, empty block|
+| Category     | Count | Tests                                                      |
+|--------------|-------|------------------------------------------------------------|
+| trees        | 2     | Schema tree, flow tree (should be skipped)                 |
+| mixed        | 1     | Multiple issue types in one file                           |
+| nested       | 2     | Deep nested boxes, tree inside box                         |
+| multi-column | 2     | Sequence diagram, branching flow                           |
+| deploy       | 1     | Pipeline with merge diagram                                |
+| edge-cases   | 5     | Empty file, no code blocks, unclosed, unicode, empty block |
 
 Total: 71 fixture directories, 213 test cases (3 tests x 71 fixtures).
 

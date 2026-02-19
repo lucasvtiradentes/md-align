@@ -40,11 +40,11 @@ For each `┌` found in a code block:
 
 ## Tolerances
 
-| Parameter     | Value | Purpose                                      |
-|---------------|-------|----------------------------------------------|
-| BOX_WALL_DRIFT| 8     | Max distance between open/close right corners|
-| Min box size  | 4     | Minimum columns between ┌ and ┐              |
-| Min height    | 3     | Minimum lines between ┌ and └ rows           |
+| Parameter      | Value | Purpose                                       |
+|----------------|-------|-----------------------------------------------|
+| BOX_WALL_DRIFT | 8     | Max distance between open/close right corners |
+| Min box size   | 4     | Minimum columns between ┌ and ┐               |
+| Min height     | 3     | Minimum lines between ┌ and └ rows            |
 
 If the distance between `col_right_open` and `col_right_close` exceeds BOX_WALL_DRIFT, the box is skipped.
 

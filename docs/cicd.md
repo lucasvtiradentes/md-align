@@ -27,11 +27,11 @@
 
 Reusable workflow triggered via `workflow_call`. Contains three parallel jobs:
 
-| Job            | Steps                                                                |
-|----------------|----------------------------------------------------------------------|
-| check          | checkout, setup Python 3.12, install, ruff check, ruff format --check|
-| practical-test | checkout, setup Python 3.12, install, docalign --check docs/         |
-| test           | checkout, setup Python 3.9 + 3.12 (matrix), install, pytest -v       |
+| Job            | Steps                                                                 |
+|----------------|-----------------------------------------------------------------------|
+| check          | checkout, setup Python 3.12, install, ruff check, ruff format --check |
+| practical-test | checkout, setup Python 3.12, install, docalign --check docs/          |
+| test           | checkout, setup Python 3.9 + 3.12 (matrix), install, pytest -v        |
 
 ### prs.yml
 

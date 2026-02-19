@@ -47,12 +47,12 @@ md-align/
 
 ## Tooling
 
-| Tool     | Purpose               | Config location     |
-|----------|-----------------------|---------------------|
-| pytest   | Test runner           | pyproject.toml      |
-| ruff     | Linting + formatting  | pyproject.toml      |
-| hatchling| Build backend         | pyproject.toml      |
-| make     | Task runner           | Makefile            |
+| Tool      | Purpose              | Config location |
+|-----------|----------------------|-----------------|
+| pytest    | Test runner          | pyproject.toml  |
+| ruff      | Linting + formatting | pyproject.toml  |
+| hatchling | Build backend        | pyproject.toml  |
+| make      | Task runner          | Makefile        |
 
 ## Scripts
 
