@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "docalign"
-version = "0.1.0"
+version = "0.1.1"
 description = "Auto-fix alignment in markdown docs"
 readme = "README.md"
 requires-python = ">=3.9"
